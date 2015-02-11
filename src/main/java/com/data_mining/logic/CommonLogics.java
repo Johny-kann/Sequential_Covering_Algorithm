@@ -14,6 +14,8 @@ import java.util.Set;
 
 
 
+import java.util.TreeMap;
+
 import com.data_mining.constants.Notations;
 import com.data_mining.model.attributes_records.DataTable;
 import com.data_mining.model.attributes_records.Records;
@@ -47,6 +49,30 @@ public class CommonLogics {
 		}
 		
 		return newList;
+	}
+	
+	public Map<String,Integer> sortMapValues(Map<String,Integer> map)
+	{
+
+		Set<String> keys = map.keySet();
+
+		Map<Integer, String> treeMap = new TreeMap<Integer, String>();
+
+		for(String key:keys)
+		{
+			treeMap.put(map.get(key), key);
+		}
+		
+		Map<String,Integer> sortmap = new LinkedHashMap<String, Integer>();
+
+		Set<Integer> keys2 = treeMap.keySet();
+		for(Integer key:keys2)
+		{
+
+		  sortmap.put(treeMap.get(key),key);
+		}
+		
+		return sortmap;
 	}
 	
 	/**

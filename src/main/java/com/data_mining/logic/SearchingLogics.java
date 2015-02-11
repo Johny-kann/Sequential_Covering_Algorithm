@@ -214,5 +214,28 @@ public class SearchingLogics {
 		return temp;
 	}
 	
+	public DataTable givetrainSet(DataTable totRecs) throws CloneNotSupportedException
+	{
+		DataTable validation = 
+				totRecs.clone();
+		
+		validation.getRecords().subList(
+				0, (int)(Notations.VALIDATION_PERCENT
+						*totRecs.sizeOfRecords()/100)-1);
+		
+		return validation;
+	}
+	
+	public DataTable giveValidationSet(DataTable totRecs) throws CloneNotSupportedException
+	{
+		DataTable validation = 
+				totRecs.clone();
+		
+		validation.getRecords().subList(
+				0, (int)((100-Notations.VALIDATION_PERCENT)
+						*totRecs.sizeOfRecords()/100)-1);
+		
+		return validation;
+	}
 	
 }

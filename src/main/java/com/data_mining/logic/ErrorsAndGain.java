@@ -185,4 +185,9 @@ public class ErrorsAndGain {
 //		System.out.println(errorSplit/parentRecords);
 		return roundOff(errorParent - errorSplit/parentRecords,4);
 	}
+	
+	public Double laplace(Integer correctClassNo,Integer noCoveredbyRule,Integer noOfClassValues)
+	{
+		return (double)(correctClassNo+1)/(noCoveredbyRule+noOfClassValues);
+	}
 }

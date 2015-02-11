@@ -280,4 +280,16 @@ public class ChoosingAttributes {
 		
 		return categories;
 	}
+	
+	public double laplaceForTable(DataTable table,String classValue)
+	{
+		CommonLogics cl = new CommonLogics();
+		Integer correctClass = cl.getCountOfClassValue(table, classValue);
+		Integer noOfRecords = table.sizeOfRecords();
+		Integer classValues = table.getClassValues().size();
+		
+		ErrorsAndGain error = new ErrorsAndGain();
+		return error.laplace(correctClass, noOfRecords, classValues);
+		
+	}
 }
