@@ -17,6 +17,7 @@ import com.data_mining.model.errors.ErrorModelList;
 import com.data_mining.model.errors.PassingAttribute;
 import com.data_mining.model.nodes.RootTreeNode;
 import com.data_mining.model.nodes.TreeNodes;
+import com.data_mining.model.rules.RuleCondition;
 import com.data_mining.model.rules.RuleSet;
 import com.data_mining.model.rules.Rules;
 import com.data_mining.view.console.Outputs;
@@ -95,7 +96,7 @@ public class ChoosingAttributes {
 	 * @param error
 	 * @return
 	 */
-	public PassingAttribute findBestAttribute(DataTable input,Double error)
+	public PassingAttribute findBestAttribute(DataTable input,Double error,String category)
 	{
 	//	Map<String,Double> attrbErrorMap = new LinkedHashMap<String, Double>();
 				
@@ -105,12 +106,12 @@ public class ChoosingAttributes {
 		{
 			if(input.getAttributes().get(i).getType().equals(Notations.DISCRETE_ATTRB))
 			{
-				errorList.addErrorModel(findErrorForDiscrete(input, i, error));
+				errorList.addErrorModel(findErrorForDiscrete(input, i, error,category));
 			}
 			
 			if(input.getAttributes().get(i).getType().equals(Notations.CNTS_ATTRB))
 			{
-				errorList.addErrorModel(findErrorForContinuous(input, i,error));
+				errorList.addErrorModel(findErrorForContinuous(input, i,error,category));
 				
 			}
 		}
@@ -127,42 +128,44 @@ public class ChoosingAttributes {
 	 * Finds error for discrete attributes
 	 * @param input
 	 * @param index
-	 * @param pError
-	 * @return error model object
+	 * 
+	 * @return List of rule Conditions
 	 */
-	private ErrorModel findErrorForDiscrete(DataTable input,int index,Double pError)
+	private List<RuleCondition> findErrorForDiscrete(DataTable input,int index,String category)
 	{
 		List<String> values =  input.getAttributes().get(index).getValues();
 		DataTable temp;
 		
-		String attrbName = input.getAttributes().get(index).getName();
 		
-		String attrbType = Notations.FULL_SPLIT;
-		
-		
-		List<Double> errors = new ArrayList<Double>();
-		List<Integer> records = new ArrayList<Integer>();
-		
-		String condChose = null;
+		List<RuleCondition> ruleConditions = new ArrayList<RuleCondition>();
+	
 		
 		for(String str:values)
 		{
 			SearchingLogics sl = new SearchingLogics();
 			temp = sl.refiningSetDiscrete(input, index, str);
-			errors.add(calculateErrorForTable(temp));
+			
 			CommonLogics cl = new CommonLogics();
-			records.add(temp.sizeOfRecords());
+	
+			
+			ruleConditions.add(
+					new RuleCondition(input.getAttributeName(index), 
+							str, 
+							cl.conditionGeneratorDiscrete(input.getAttributeName(index), str), 
+							laplaceForTable(temp, category),
+							Notations.FULL_SPLIT)
+					);
 		
 		}
 		
 //		System.out.println(errors);
-		ErrorsAndGain er = new ErrorsAndGain();
-		Double error = er.errorSplit(errors, records, input.sizeOfRecords());
+//		ErrorsAndGain er = new ErrorsAndGain();
+//		Double error = er.errorSplit(errors, records, input.sizeOfRecords());
 		
+		return ruleConditions;
 		
-		
-		Double gainRatio = er.gainRatio(records, input.sizeOfRecords(), pError,error);
-		return new ErrorModel(attrbName,index, attrbType, null, error,gainRatio);
+//		Double gainRatio = er.gainRatio(records, input.sizeOfRecords(), pError,error);
+	//	return new ErrorModel(attrbName,index, attrbType, null, error,gainRatio);
 	}
 	
 
@@ -172,79 +175,55 @@ public class ChoosingAttributes {
 	 * @param table
 	 * @param attribute index
 	 * @param parent error
-	 * @return object of error model
+	 * @return list of Rule Conditions
 	 */
-	private ErrorModel findErrorForContinuous(DataTable input,int index,Double pError)
+	private List<RuleCondition> findErrorForContinuous(DataTable input,int index,String category)
 	{
+		List<RuleCondition> ruleConditions = new ArrayList<RuleCondition>();
+		
 		List<Double> values = findValuesForContinuousAttributes(input, index);
 		DataTable temp,temp2;
 		
-		String attrbName = input.getAttributes().get(index).getName();
-//		System.out.println(attrbName);
-		String attrbType = Notations.SEMI_SPLIT;
-		
-		List<Double> errorSplit = new ArrayList<Double>();
-		List<Double> gainRatio = new ArrayList<Double>();
-		
-		List<String> strChose = new ArrayList<String>();
-		
-		List<String> condChose = new ArrayList<String>();
-		
 //		System.out.println(values);
 //		new Outputs().outPutTable(input);
+		
+		CommonLogics cl = new CommonLogics();
 		
 		for(Double str:values)
 		{
 			List<Integer> records = new ArrayList<Integer>();
 			List<Double> errors = new ArrayList<Double>();
 			SearchingLogics sl = new SearchingLogics();
-			String name = input.getAttributes().get(index).getName();
-			String Cond = name+"<"+str;
-			condChose.add(Cond);
+			String name = input.getAttributeName(index);
+			
+			
 			temp = sl.refiningSetContinuousLeft(input, index, str);
 			
-//			 System.out.println("\n\nRefined Table 1 "+str);
+			ruleConditions.add(
+					new RuleCondition(input.getAttributeName(index), 
+							str.toString(), 
+							cl.conditionGeneratorCnts(input.getAttributeName(index), str,true), 
+							laplaceForTable(temp, category),
+							Notations.SEMI_SPLIT)
+			);
 			
-			 
-			errors.add(calculateErrorForTable(temp));
 			
-			CommonLogics cl = new CommonLogics();
-			records.add(temp.sizeOfRecords());
-//			Outputs out = new Outputs();
-//			out.outPutTable(temp);
-			
-			String Cond2 = name+">="+str;
-			condChose.add(Cond2);
 			temp2 = sl.refiningSetContinuousRight(input, index, str);
-//			System.out.println("\n\nRefined Table 2 "+str);
+
 			 
-			errors.add(calculateErrorForTable(temp2));
+			ruleConditions.add(
+					new RuleCondition(input.getAttributeName(index), 
+							str.toString(), 
+							cl.conditionGeneratorCnts(input.getAttributeName(index), str,false), 
+							laplaceForTable(temp2, category),
+							Notations.SEMI_SPLIT)
+			);
+
 			
-			records.add(temp2.sizeOfRecords());
-			
-//			out.outPutTable(temp2);
-			
-			strChose.add(str.toString());
-			
-			ErrorsAndGain er = new ErrorsAndGain();
-		
-			Double error = er.errorSplit(errors,
-					records, 
-					input.sizeOfRecords());
-			
-			Double gainR = er.gainRatio(records, 
-					input.sizeOfRecords(), pError,error);
-			
-			errorSplit.add(error);
-			gainRatio.add(gainR);
 			
 		}
 		
-		
-		
-		ErrorModel err = new ErrorModel(attrbName,index, attrbType, strChose, errorSplit,gainRatio,condChose);
-//		
-		return err;
+		return ruleConditions;
 	}
 	
 	/**

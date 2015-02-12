@@ -51,6 +51,11 @@ public class CommonLogics {
 		return newList;
 	}
 	
+	public String conditionGeneratorDiscrete(String name,String condition)
+	{
+		return name+Notations.DISCRETE_EQUALITY+condition;
+	}
+	
 	public Map<String,Integer> sortMapValues(Map<String,Integer> map)
 	{
 
@@ -519,5 +524,27 @@ public class CommonLogics {
 			temp = Notations.ERROR_IN_COND;
 		}
 		return temp;
+	}
+
+	
+	/**
+	 * If true is given condition chosen in less than and if false is given condition chosen is greater than
+	 * @param attributeName
+	 * @param value
+	 * @param true or false
+	 * @return rule condition
+	 */
+	public String conditionGeneratorCnts(String attributeName, Double str,
+			boolean b) {
+		// TODO Auto-generated method stub
+		if(b==false)
+		{
+			return attributeName+Notations.CNTNS_GREATER_THAN+str;
+		}
+		else
+		{
+			return attributeName+Notations.CNTNS_LESS_THAN+str;
+		}
+		
 	}
 }

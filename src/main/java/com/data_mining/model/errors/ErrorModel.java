@@ -15,10 +15,9 @@ public class ErrorModel {
 	private String attrbName;
 	private Integer attrIndex;
 	private String attrbTye;
-	private List<String> attrbValues;
-	private List<Double> errors;
-	private List<Double> gainRatio;
-	private List<String> conds;
+	private String attrbValues;
+	private Double error;
+	private String conds;
 	
 	public ErrorModel(String name,Integer Index,String type,List<String> values,List<Double> errors,List<Double> gainRatio, List<String> conds)
 	{

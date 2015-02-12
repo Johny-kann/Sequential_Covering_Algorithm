@@ -97,6 +97,11 @@ public class DataTable implements Cloneable {
 		return sl.searchingAttribute(attributes, name).getType();
 	}
 	
+	public String getAttributeName(int index)
+	{
+		return attributes.get(index).getName();
+	}
+	
 	public List<String> getAttributeValues(String name)
 	{
 		SearchingLogics sl = new SearchingLogics();
