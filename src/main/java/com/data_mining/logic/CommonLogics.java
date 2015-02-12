@@ -486,6 +486,11 @@ public class CommonLogics {
 		return temp;
 	}
 	
+	
+	
+	
+	
+	
 	/**
 	 * based on this value the records are assigned to the children
 	 * @param node condition of parent

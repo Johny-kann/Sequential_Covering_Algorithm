@@ -11,11 +11,14 @@ import javafx.scene.chart.PieChart.Data;
 
 import com.data_mining.constants.Notations;
 import com.data_mining.model.attributes_records.DataTable;
+import com.data_mining.model.attributes_records.OrderedClassSet;
 import com.data_mining.model.errors.ErrorModel;
 import com.data_mining.model.errors.ErrorModelList;
 import com.data_mining.model.errors.PassingAttribute;
 import com.data_mining.model.nodes.RootTreeNode;
 import com.data_mining.model.nodes.TreeNodes;
+import com.data_mining.model.rules.RuleSet;
+import com.data_mining.model.rules.Rules;
 import com.data_mining.view.console.Outputs;
 
 /**
@@ -30,12 +33,39 @@ public class ChoosingAttributes {
 	private String attributeName;
 	private List<String> attributeValues;
 	
+	private String selectedClass;
+	
 	public ChoosingAttributes(DataTable input)
 	{
 		this.inputRecords = input;
 		numOfAttributes= input.numberOfAttributes();
 	}
 	
+	public RuleSet fillRuleSet(DataTable input,OrderedClassSet set)
+	{
+		RuleSet ruleSet = new RuleSet();
+		
+		for(int i=0;i<ruleSet.sizeOfRuleSet()-1;i++)
+		{
+			
+		}
+	}
+	
+	public RuleSet extractRule(DataTable input,RuleSet ruleset,String category)
+	{
+		
+		
+		
+		
+	//	Rules rules = new Rules(index, category);
+		
+	}
+	
+	public Rules addRule(DataTable input,String category,int index)
+	{
+		Double currentMeasure = laplaceForTable(input, category);
+		
+	}
 	
 	/**
 	 * Calculates the error for the table
@@ -122,10 +152,7 @@ public class ChoosingAttributes {
 			errors.add(calculateErrorForTable(temp));
 			CommonLogics cl = new CommonLogics();
 			records.add(temp.sizeOfRecords());
-//			Outputs out = new Outputs();
-//			out.outPutTable(temp);
-		 
-			
+		
 		}
 		
 //		System.out.println(errors);

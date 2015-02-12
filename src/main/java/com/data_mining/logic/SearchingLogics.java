@@ -153,25 +153,34 @@ public class SearchingLogics {
 						oldSet.getAttributes().get(i).getValues()
 						);
 			}
-			
-			
 		}
 		
 	}
+	
 	public void addAttributeContentsContinuous(DataTable newSet,DataTable oldSet, int attrbIndex)
-		{
+	{
 			for(int i=0;i<oldSet.totColumns();i++)
 			{
 						newSet.addAttribute(oldSet.getAttributes().get(i).getName(),
 							oldSet.getAttributes().get(i).getType(),
 							oldSet.getAttributes().get(i).getValues()
 							);
-				
-				
-				
 			}
-		
 	}
+	
+	public void addAttributeContents(DataTable newSet,DataTable oldSet)
+	{
+		for(int i=0;i<oldSet.totColumns();i++)
+		{
+					newSet.addAttribute(oldSet.getAttributes().get(i).getName(),
+						oldSet.getAttributes().get(i).getType(),
+						oldSet.getAttributes().get(i).getValues()
+						);
+			
+		}
+	}
+
+	
 	
 	public DataTable extractDataBasedOnCondition(DataTable input,String nodeCondition)
 	{
@@ -226,16 +235,39 @@ public class SearchingLogics {
 		return validation;
 	}
 	
-	public DataTable giveValidationSet(DataTable totRecs) throws CloneNotSupportedException
+	public DataTable getTrainingSet(DataTable input)
 	{
-		DataTable validation = 
-				totRecs.clone();
+		DataTable newTable = new DataTable();
 		
-		validation.getRecords().subList(
-				0, (int)((100-Notations.VALIDATION_PERCENT)
-						*totRecs.sizeOfRecords()/100)-1);
+		addAttributeContents(newTable, input);
 		
-		return validation;
+		int endIndex = (int)((Notations.VALIDATION_PERCENT)/100*input.sizeOfRecords());
+		
+		for(int i=0;i<endIndex;i++)
+		{
+			newTable.addRecord(new Records(
+					input.getRecordAtIndex(i))
+			);
+		}
+		return newTable;
+	}
+	
+	
+	public DataTable getValidationSet(DataTable input)
+	{
+		DataTable newTable = new DataTable();
+		
+		addAttributeContents(newTable, input);
+		
+		int startIndex = (int)((Notations.VALIDATION_PERCENT)/100*input.sizeOfRecords());
+		
+		for(int i=startIndex;i<input.sizeOfRecords();i++)
+		{
+			newTable.addRecord(new Records(
+					input.getRecordAtIndex(i))
+			);
+		}
+		return newTable;
 	}
 	
 }

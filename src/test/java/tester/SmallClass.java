@@ -12,21 +12,59 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import com.data_mining.constants.Notations;
+import com.data_mining.controller.MainController;
+import com.data_mining.model.attributes_records.DataTable;
+
 public class SmallClass {
 		
 	public static void main(String[] args) 
 	{
-	List<Integer> test = new ArrayList<Integer>();
-	test.add(1);
-	test.add(2);
-	test.add(3);
-	test.add(4);
-	test.add(5);
-	test.add(6);
-	test.add(7);
+	 DataTable input = new DataTable();
+	 
+	 Test tt = new Test();
+	 tt.name = "Johny";
+	 tt.age = "5";
+	 tt.tt.gir="First";
+	 Test t2=null;
+	try {
+		t2 = tt.clone();
+	} catch (CloneNotSupportedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} 
+	 
+	 t2.name = "Kevin";
+	 t2.tt.gir="Second";
+	 
+	 System.out.println(t2.name);
+	 System.out.println(tt.name);
+	 System.out.println(t2.tt.gir);
+	 System.out.println(tt.tt.gir);
+	}
 	
-	test.subList(0, 4);
-	test.removeAll(test.subList(4, 5));
-	System.out.println(test);
+}
+
+class Test implements Cloneable
+{
+	public String name="Hello";
+	public String age = "5";
+	public gir tt = new gir();
+	
+	@Override
+	public Test clone() throws CloneNotSupportedException
+	{
+		return (Test) super.clone();
+	}
+}
+
+class gir implements Cloneable
+{
+	public String gir;
+	
+	@Override
+	public gir clone() throws CloneNotSupportedException
+	{
+		return (gir) super.clone();
 	}
 }

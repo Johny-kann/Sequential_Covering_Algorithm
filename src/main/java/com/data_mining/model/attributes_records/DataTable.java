@@ -52,7 +52,7 @@ public class DataTable implements Cloneable {
 	 */
 	public Integer sizeOfRecords()
 	{
-		return numberOfRecords;
+		return records.size();
 	}
 	
 	/**
