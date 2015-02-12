@@ -63,7 +63,7 @@ public class SearchingLogics {
 		if(cond.getSplit().equalsIgnoreCase(Notations.DISCRETE_EQUAL))
 		{
 			return refiningSetDiscrete(table, table.getAttributeIndex(cond.getName())
-					, cond.getName());
+					, cond.getValue());
 		}
 		else if(cond.getSplit().equalsIgnoreCase(Notations.CNTS_LEFT))
 		{

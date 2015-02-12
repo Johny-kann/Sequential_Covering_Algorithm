@@ -237,7 +237,7 @@ public class CommonLogics {
 	 * @param List of rule conditions
 	 * @return best rule condition
 	 */
-	public RuleCondition bestAttributeFromErrorModel(List<RuleCondition> rules)
+	public RuleCondition bestAttributeFromErrorModel(List<RuleCondition> rules) throws IndexOutOfBoundsException
 	{
 		RuleCondition index = rules.get(0);
 //		Double laplace = rules.get(0).getError();
@@ -252,95 +252,7 @@ public class CommonLogics {
 
 		return index;
 		
-	/*	for(int i=0;i<input.getErrors().size();i++)
-		{
-			if(input.getErrors().get(i).getAttrbTye().equals(Notations.FULL_SPLIT))
-			{
-
-				
-				if(error>input.getErrorModel(i).getErrors().get(0))
-				{
-			
-				error=input.getErrorModel(i).getErrors().get(0);
-				index = new PassingAttribute(
-						input.getErrorModel(i).getAttrbName(),
-						input.getErrorModel(i).getAttrIndex(),
-						Notations.FULL_SPLIT, 
-						Notations.FULL_SPLIT, 
-						input.getErrorModel(i).getErrors().get(0),
-						input.getErrorModel(i).getgainRatio().get(0)
-						);
-			
-				}
-				else if(error.equals(input.getErrorModel(i).getErrors().get(0)))
-				{
-					
-					if(index.getGainRatio()<input.getErrorModel(i).getgainRatio().get(0))
-					{
-						index = new PassingAttribute(
-								input.getErrorModel(i).getAttrbName(),
-								input.getErrorModel(i).getAttrIndex(),
-								Notations.FULL_SPLIT, 
-								Notations.FULL_SPLIT, 
-								input.getErrorModel(i).getErrors().get(0),
-								input.getErrorModel(i).getgainRatio().get(0)
-								);
-					}
-				}
-			}
-			else
-			{
-				for(int j=0;j<input.
-						getErrorModel(i).
-						getAttrbValues().
-						size();j++)
-				{
-
-					
-					
-					if(error>input.getErrorModel(i).getErrors().get(j))
-					{
-				
-					error=input.getErrorModel(i).getErrors().get(j);
-					index = new PassingAttribute(
-							input.getErrorModel(i).getAttrbName(),
-							input.getErrorModel(i).getAttrIndex(),
-							Notations.SEMI_SPLIT, 
-							input.getErrorModel(i).getConds().get(j), 
-							input.getErrorModel(i).getErrors().get(j),
-							input.getErrorModel(i).getgainRatio().get(j),
-							Double.parseDouble(
-							input.getErrorModel(i).getAttrbValues().get(j))
-							
-							);
-//					
-				
-					
-					}
-					
-					else if(error.equals(input.getErrorModel(i).getErrors().get(j)))
-					{
-						
-						if(index.getGainRatio()<input.getErrorModel(i).getgainRatio().get(j))
-						{
-						
-							index = new PassingAttribute(
-									input.getErrorModel(i).getAttrbName(),
-									input.getErrorModel(i).getAttrIndex(),
-									Notations.SEMI_SPLIT, 
-									input.getErrorModel(i).getConds().get(j), 
-									input.getErrorModel(i).getErrors().get(j),
-									input.getErrorModel(i).getgainRatio().get(j),
-									Double.parseDouble(
-									input.getErrorModel(i).getAttrbValues().get(j))
-									
-									); 
-						}
-					}*/
-				
-	
-	//	return index;
-	}
+		}
 	
 	/**
 	 * @param table

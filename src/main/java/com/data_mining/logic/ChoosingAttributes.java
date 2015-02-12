@@ -52,20 +52,17 @@ public class ChoosingAttributes {
 		}
 	}
 	
-	/*
+	*/
 	
-/*	public RuleSet extractRule(DataTable input,RuleSet ruleset,String category)
+	public RuleSet extractRule(DataTable input,RuleSet ruleset,String category)
 	{
-		
-		
-		
-		
+			
 	//	Rules rules = new Rules(index, category);
 		
 	}
-	*/
 	
-	public Rules addRule(DataTable input,String category,int index)
+	
+public Rules addRule(DataTable input,String category,int index)
 	{
 		DataTable temp = null;
 		try {
@@ -74,7 +71,8 @@ public class ChoosingAttributes {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Rules ruleRecord = new Rules(0, category);
+		new Outputs().outPutTable(temp);
+		Rules ruleRecord = new Rules(index, category);
 		
 		Double pastMeasure = laplaceForTable(input, category);
 		Double newMeasure = null;
@@ -87,7 +85,10 @@ public class ChoosingAttributes {
 		{
 			
 			System.out.println(pastMeasure);
-			RuleCondition rc = findBestAttribute(temp, pastMeasure, category);
+			RuleCondition rc;
+			try
+			{
+			rc = findBestAttribute(temp, pastMeasure, category);
 			newMeasure = rc.getError();
 			
 			if(newMeasure>pastMeasure)
@@ -96,7 +97,12 @@ public class ChoosingAttributes {
 				System.out.println(pastMeasure+"old");
 			
 			ruleRecord.addRule(rc);
+
+			
 			temp = sl.refiningSetBasedonRuleCondition(temp, rc);
+		
+			new Outputs().outPutTable(temp);
+			
 			if(temp.sizeOfRecords()==0)
 			{
 			run = false;
@@ -113,15 +119,22 @@ public class ChoosingAttributes {
 			{
 				run = false;
 			}
-		}
+			}catch(IndexOutOfBoundsException ie)
+			{
+				run = false;
+				System.out.println("Index Out of Bound");
+			}
+			
+			
+			
+}
 		
 	
 		
 		
 	//	System.out.println(rc.getCondition()+rc.getError());
-		
-		System.out.println(ruleRecord.getRules().get(0).getCondition()
-				);
+		System.out.println(
+				new Outputs().outputRule(ruleRecord));
 		
 		return ruleRecord;
 	}
@@ -155,7 +168,7 @@ public class ChoosingAttributes {
 	 * @param +ve class
 	 * @return
 	 */
-	public RuleCondition findBestAttribute(DataTable input,Double error,String category)
+	public RuleCondition findBestAttribute(DataTable input,Double error,String category) throws IndexOutOfBoundsException
 	{
 	//	Map<String,Double> attrbErrorMap = new LinkedHashMap<String, Double>();
 				
@@ -166,8 +179,7 @@ public class ChoosingAttributes {
 			if(input.getAttributes().get(i).getType().equals(Notations.DISCRETE_ATTRB))
 			{
 	
-				
-				rules.addAll(findErrorForDiscrete(input, i,category)
+			rules.addAll(findErrorForDiscrete(input, i,category)
 						);
 				
 			}
@@ -221,7 +233,7 @@ public class ChoosingAttributes {
 			
 			CommonLogics cl = new CommonLogics();
 	
-			
+		
 			ruleConditions.add(
 					new RuleCondition(input.getAttributeName(index), 
 							str, 
@@ -273,6 +285,7 @@ public class ChoosingAttributes {
 			
 			temp = sl.refiningSetContinuousLeft(input, index, str);
 			
+		
 			ruleConditions.add(
 					new RuleCondition(input.getAttributeName(index), 
 							str.toString(), 
@@ -284,6 +297,7 @@ public class ChoosingAttributes {
 			
 			temp2 = sl.refiningSetContinuousRight(input, index, str);
 
+	
 			 
 			ruleConditions.add(
 					new RuleCondition(input.getAttributeName(index), 

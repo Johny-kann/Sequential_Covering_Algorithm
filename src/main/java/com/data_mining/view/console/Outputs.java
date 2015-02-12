@@ -1,6 +1,8 @@
 package com.data_mining.view.console;
 
 import com.data_mining.model.attributes_records.DataTable;
+import com.data_mining.model.rules.RuleCondition;
+import com.data_mining.model.rules.Rules;
 
 public class Outputs {
 
@@ -53,5 +55,15 @@ public class Outputs {
 			}
 		}
 		return str;
+	}
+	
+	public String outputRule(Rules rule)
+	{
+		StringBuffer str = new StringBuffer();
+		for(RuleCondition temp:rule.getRules())
+		{
+			str.append(temp.getCondition()+"/\\");
+		}
+		return str.substring(0, str.length()-2).toString();
 	}
 }
