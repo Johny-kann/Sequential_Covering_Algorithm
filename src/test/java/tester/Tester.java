@@ -20,6 +20,7 @@ public class Tester {
 	//	DataTable records= mc.getMainTable();
 		mc.fillRuleSet();
 	
-			
+		ChoosingAttributes choosAttrb = new ChoosingAttributes(mc.getTrainAttributes());
+		choosAttrb.addRule(mc.getMainTable(), "yes", 0);
 	}
 }

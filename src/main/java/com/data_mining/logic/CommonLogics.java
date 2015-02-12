@@ -21,6 +21,7 @@ import com.data_mining.model.attributes_records.DataTable;
 import com.data_mining.model.attributes_records.Records;
 import com.data_mining.model.errors.ErrorModelList;
 import com.data_mining.model.errors.PassingAttribute;
+import com.data_mining.model.rules.RuleCondition;
 
 /**
  * @author Janakiraman
@@ -232,16 +233,26 @@ public class CommonLogics {
 	}
 	
 	/**
-	 * finds the best attribute and returns the passing attribute obj
-	 * @param errorModel
-	 * @return best attribute obj
+	 * finds the best rule from the list of rule condition and returns the best rule condition
+	 * @param List of rule conditions
+	 * @return best rule condition
 	 */
-	public PassingAttribute bestAttributeFromErrorModel(ErrorModelList input)
+	public RuleCondition bestAttributeFromErrorModel(List<RuleCondition> rules)
 	{
-		PassingAttribute index = null;
-		Double error=1.0;
+		RuleCondition index = rules.get(0);
+//		Double laplace = rules.get(0).getError();
+		
+		for(RuleCondition rule:rules)
+		{
+			if(index.getError()<rule.getError())
+			{
+				index = rule;
+			}
+		}
 
-		for(int i=0;i<input.getErrors().size();i++)
+		return index;
+		
+	/*	for(int i=0;i<input.getErrors().size();i++)
 		{
 			if(input.getErrors().get(i).getAttrbTye().equals(Notations.FULL_SPLIT))
 			{
@@ -325,11 +336,10 @@ public class CommonLogics {
 									
 									); 
 						}
-					}
-				}
-			}
-		}
-		return index;
+					}*/
+				
+	
+	//	return index;
 	}
 	
 	/**

@@ -1,5 +1,6 @@
 package com.data_mining.model.rules;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Rules
@@ -12,6 +13,7 @@ public class Rules
 	{
 		ruleNumber = index;
 		category = clas;
+		rules = new ArrayList<RuleCondition>();
 	}
 	
 	

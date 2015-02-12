@@ -7,6 +7,7 @@ import java.util.Map;
 
 
 
+
 import com.data_mining.logic.CommonLogics;
 import com.data_mining.logic.SearchingLogics;
 
@@ -45,7 +46,6 @@ public class DataTable implements Cloneable {
 	      
 	      return clonedCustomer;
 	   }
-	
 	/**
 	 * Gives number of Records
 	 * @return no of records

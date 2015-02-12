@@ -7,6 +7,7 @@ import com.data_mining.constants.Notations;
 import com.data_mining.model.attributes_records.AttributesSpecifications;
 import com.data_mining.model.attributes_records.DataTable;
 import com.data_mining.model.attributes_records.Records;
+import com.data_mining.model.rules.RuleCondition;
 
 /**
  * @author Janakiraman
@@ -56,6 +57,36 @@ public class SearchingLogics {
 		return result;
 	}
 	
+	public DataTable refiningSetBasedonRuleCondition(DataTable table,RuleCondition cond)
+	{
+		
+		if(cond.getSplit().equalsIgnoreCase(Notations.DISCRETE_EQUAL))
+		{
+			return refiningSetDiscrete(table, table.getAttributeIndex(cond.getName())
+					, cond.getName());
+		}
+		else if(cond.getSplit().equalsIgnoreCase(Notations.CNTS_LEFT))
+		{
+			return refiningSetContinuousLeft(table, table.getAttributeIndex(cond.getName()),
+					Double.parseDouble(	
+					cond.getValue()
+					));
+		}
+		else if(cond.getSplit().equalsIgnoreCase(Notations.CNTS_RIGHT))
+		{
+			return refiningSetContinuousRight(table, table.getAttributeIndex(cond.getName()),
+					Double.parseDouble(	
+					cond.getValue()
+					));
+		}
+		else
+		{
+			System.out.println("Splitting condition dint match");
+			return null;
+		}
+		
+		 
+	}
 	
 	public DataTable refiningSetDiscrete(DataTable table,int attributeIndex,String attrValue)
 	{

@@ -42,7 +42,7 @@ public class ChoosingAttributes {
 		numOfAttributes= input.numberOfAttributes();
 	}
 	
-	public RuleSet fillRuleSet(DataTable input,OrderedClassSet set)
+/*	public RuleSet fillRuleSet(DataTable input,OrderedClassSet set)
 	{
 		RuleSet ruleSet = new RuleSet();
 		
@@ -52,7 +52,9 @@ public class ChoosingAttributes {
 		}
 	}
 	
-	public RuleSet extractRule(DataTable input,RuleSet ruleset,String category)
+	/*
+	
+/*	public RuleSet extractRule(DataTable input,RuleSet ruleset,String category)
 	{
 		
 		
@@ -61,11 +63,67 @@ public class ChoosingAttributes {
 	//	Rules rules = new Rules(index, category);
 		
 	}
+	*/
 	
 	public Rules addRule(DataTable input,String category,int index)
 	{
-		Double currentMeasure = laplaceForTable(input, category);
+		DataTable temp = null;
+		try {
+			temp = input.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Rules ruleRecord = new Rules(0, category);
 		
+		Double pastMeasure = laplaceForTable(input, category);
+		Double newMeasure = null;
+		
+		Boolean run = true;
+
+		SearchingLogics sl = new SearchingLogics();
+		
+		while(run)
+		{
+			
+			System.out.println(pastMeasure);
+			RuleCondition rc = findBestAttribute(temp, pastMeasure, category);
+			newMeasure = rc.getError();
+			
+			if(newMeasure>pastMeasure)
+			{
+				System.out.println(newMeasure+"new");
+				System.out.println(pastMeasure+"old");
+			
+			ruleRecord.addRule(rc);
+			temp = sl.refiningSetBasedonRuleCondition(temp, rc);
+			if(temp.sizeOfRecords()==0)
+			{
+			run = false;
+			System.out.println(temp.sizeOfRecords());
+			}
+			else
+			{
+				run = true;
+			}
+			pastMeasure = newMeasure;
+			
+			}
+			else
+			{
+				run = false;
+			}
+		}
+		
+	
+		
+		
+	//	System.out.println(rc.getCondition()+rc.getError());
+		
+		System.out.println(ruleRecord.getRules().get(0).getCondition()
+				);
+		
+		return ruleRecord;
 	}
 	
 	/**
@@ -94,31 +152,44 @@ public class ChoosingAttributes {
 	 * finds the best attribute based on the split and returns the an object containing the details
 	 * @param table
 	 * @param error
+	 * @param +ve class
 	 * @return
 	 */
-	public PassingAttribute findBestAttribute(DataTable input,Double error,String category)
+	public RuleCondition findBestAttribute(DataTable input,Double error,String category)
 	{
 	//	Map<String,Double> attrbErrorMap = new LinkedHashMap<String, Double>();
 				
-		ErrorModelList errorList = new ErrorModelList();
+		List<RuleCondition> rules = new ArrayList<RuleCondition>();
 		
 		for(int i=0;i<input.numberOfAttributes();i++)
 		{
 			if(input.getAttributes().get(i).getType().equals(Notations.DISCRETE_ATTRB))
 			{
-				errorList.addErrorModel(findErrorForDiscrete(input, i, error,category));
+	
+				
+				rules.addAll(findErrorForDiscrete(input, i,category)
+						);
+				
 			}
 			
 			if(input.getAttributes().get(i).getType().equals(Notations.CNTS_ATTRB))
 			{
-				errorList.addErrorModel(findErrorForContinuous(input, i,error,category));
+							
+				rules.addAll(findErrorForContinuous
+						(input, i,category)
+						);
 				
 			}
 		}
 		
+		
+		for(RuleCondition rr:rules)
+		{
+			System.out.println(rr.getCondition()+rr.getError());
+		}
 		CommonLogics cl = new CommonLogics();
 
-		return cl.bestAttributeFromErrorModel(errorList);
+		return cl.bestAttributeFromErrorModel(rules);
 		
 		
 	}
@@ -143,7 +214,10 @@ public class ChoosingAttributes {
 		for(String str:values)
 		{
 			SearchingLogics sl = new SearchingLogics();
+//			System.out.println(input.getAttributeName(index));
+			
 			temp = sl.refiningSetDiscrete(input, index, str);
+//			System.out.println(temp.getAttributeName(index));
 			
 			CommonLogics cl = new CommonLogics();
 	
@@ -153,7 +227,7 @@ public class ChoosingAttributes {
 							str, 
 							cl.conditionGeneratorDiscrete(input.getAttributeName(index), str), 
 							laplaceForTable(temp, category),
-							Notations.FULL_SPLIT)
+							Notations.DISCRETE_EQUAL)
 					);
 		
 		}
@@ -204,7 +278,7 @@ public class ChoosingAttributes {
 							str.toString(), 
 							cl.conditionGeneratorCnts(input.getAttributeName(index), str,true), 
 							laplaceForTable(temp, category),
-							Notations.SEMI_SPLIT)
+							Notations.CNTS_LEFT)
 			);
 			
 			
@@ -216,7 +290,7 @@ public class ChoosingAttributes {
 							str.toString(), 
 							cl.conditionGeneratorCnts(input.getAttributeName(index), str,false), 
 							laplaceForTable(temp2, category),
-							Notations.SEMI_SPLIT)
+							Notations.CNTS_RIGHT)
 			);
 
 			
