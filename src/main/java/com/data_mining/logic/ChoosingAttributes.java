@@ -62,16 +62,29 @@ public class ChoosingAttributes {
 	{
 			
 	//	Rules rules = new Rules(index, category);
-		DataTable temp = input;
+		DataTable temp=null;
+		try {
+			temp = input.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		while(temp.sizeOfRecords()!=0)
 		{
-			
+			DataTable reserve;
 			Rules rule = addRule(temp, category, index);
 			System.out.println("After Rule decided");
-//			new Outputs().outPutTable(temp);
-			temp = removeCoveredRules(temp, rule);
+
+			
+			reserve = refineCoveredRules(temp, rule);
+			new Outputs().outPutTable(reserve);
+			
+			CommonLogics cl = new CommonLogics();
+			System.out.println("\n");
+			temp = cl.removeRecords(temp, reserve);
 			new Outputs().outPutTable(temp);
+
 			ruleset.addRules(rule);
 			index++;
 		}
@@ -79,7 +92,7 @@ public class ChoosingAttributes {
 		return index;
 	}
 	
-	public DataTable removeCoveredRules(DataTable input,Rules rule)
+	public DataTable refineCoveredRules(DataTable input,Rules rule)
 	{
 		DataTable temp = null;
 		try {

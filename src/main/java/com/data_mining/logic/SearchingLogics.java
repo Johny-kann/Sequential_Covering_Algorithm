@@ -94,7 +94,7 @@ public class SearchingLogics {
 	{
 		if(cond.getSplit().equalsIgnoreCase(Notations.DISCRETE_EQUAL))
 		{
-			return removingSet(table, table.getAttributeIndex(cond.getName())
+			return refiningSet(table, table.getAttributeIndex(cond.getName())
 					, cond.getValue());
 		}
 		
@@ -120,16 +120,16 @@ public class SearchingLogics {
 		}
 	}
 	
-	/*public DataTable refiningSet(DataTable table,int attributeIndex,String attrValue)
+	public DataTable refiningSet(DataTable table,int attributeIndex,String attrValue)
 	{
 		DataTable newSet = new DataTable();
 		addAttributeContents(newSet, table, attributeIndex);
 		recordRefinment(newSet, table, attributeIndex, attrValue);
 		return newSet;
 		
-	}*/
+	}
 	
-	public DataTable removingSet(DataTable table,int attributeIndex,String attrValue)
+	/*public DataTable removingSet(DataTable table,int attributeIndex,String attrValue)
 	{
 		DataTable newSet = new DataTable();
 		
@@ -138,7 +138,7 @@ public class SearchingLogics {
 		recordRemoval(newSet, table, attributeIndex, attrValue);
 		return newSet;
 		
-	}
+	}*/
 	
 	public DataTable refiningSetDiscrete(DataTable table,int attributeIndex,String attrValue)
 	{

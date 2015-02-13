@@ -147,6 +147,21 @@ public class CommonLogics {
 		
 	}
 	
+	public DataTable removeRecords(DataTable input,DataTable remover)
+	{
+		List<Records> recs = remover.getRecords();
+		DataTable freshDataTable=null;
+		try {
+			freshDataTable = input.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		freshDataTable.getRecords().removeAll(remover.getRecords());
+		return freshDataTable;
+	}
+	
 	public void removeRecordByAttrbValue(DataTable table,int index,String value)
 	{
 		for(int i=0;i<table.sizeOfRecords();i++)

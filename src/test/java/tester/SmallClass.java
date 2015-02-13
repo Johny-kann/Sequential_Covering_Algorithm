@@ -21,11 +21,19 @@ public class SmallClass {
 		
 	public static void main(String[] args) 
 	{
-	 Map<String,Integer> map = new LinkedHashMap<String, Integer>();
-	 map.put("First", 1);
-	 map.put("Second", 2);
-	 map.put("Third", 3);
-	 
-	 System.out.println(new CommonLogics().getValueofMapAtIndex(map, 2));
+	MainController mc = new MainController();
+	mc.loadAttributesAndRecords();
+	DataTable table1 = mc.getTrainAttributes();
+	
+	DataTable table2 = null;
+	try {
+		table2 = table1.clone();
+	} catch (CloneNotSupportedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	 table2.getRecords().remove(1);
+	
 	}
 }
