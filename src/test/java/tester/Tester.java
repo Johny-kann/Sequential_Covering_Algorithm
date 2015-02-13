@@ -18,18 +18,9 @@ public class Tester {
 		MainController mc = new MainController();
 		mc.loadAttributesAndRecords();
 		mc.fillRuleSet();
-	//	DataTable records= mc.getMainTable();
-	
 		ChoosingAttributes choosAttrb = new ChoosingAttributes(mc.getMainTable());
 		
-//		RuleSet set = choosAttrb.fillRuleSet(mc.getMainTable(), sortclasses);
 		RuleSet rule = new RuleSet();
-	//	choosAttrb.extractRule(mc.getMainTable(), rule, "yes", 0);
-		
-	//	String str = new Outputs().outputRuleSet(rule);
-		
-	//	System.out.println(str);
-		
 		
 		
 		rule = choosAttrb.fillRuleSet(mc.getMainTable(), mc.getSortedClassSet());

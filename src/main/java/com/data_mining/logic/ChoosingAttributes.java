@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import sun.misc.GC.LatencyRequest;
 import javafx.scene.chart.PieChart.Data;
 
 import com.data_mining.constants.Notations;
@@ -107,6 +108,30 @@ public class ChoosingAttributes {
 		}
 		
 		return index;
+	}
+	
+	public void pruneTheRule(DataTable input,Rules rule)
+	{
+			 
+		Rules newRule = null;
+		try {
+			newRule = rule.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		DataTable temp = refineCoveredRules(input, newRule);
+		Double laplace = laplaceForTable(temp, newRule.getCategory());
+		Double gError = 1- laplace;
+		
+		for(RuleCondition cond:newRule.getRules())
+		{
+		
+		Double newlaplace = laplaceForTable(temp, newRule.getCategory());
+		Double newgError = 1- laplace;
+		}
+
+		
 	}
 	
 	public DataTable refineCoveredRules(DataTable input,Rules rule)

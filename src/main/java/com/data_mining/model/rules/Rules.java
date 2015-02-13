@@ -3,7 +3,7 @@ package com.data_mining.model.rules;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Rules
+public class Rules implements Cloneable
 {
 	Integer ruleNumber;
 	List<RuleCondition> rules;
@@ -16,6 +16,11 @@ public class Rules
 		rules = new ArrayList<RuleCondition>();
 	}
 	
+	@Override
+	public Rules clone() throws CloneNotSupportedException
+	{
+		return (Rules)super.clone();
+	}
 	
 	public Integer getRuleNumber() {
 		return ruleNumber;
