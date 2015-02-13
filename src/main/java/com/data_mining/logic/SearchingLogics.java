@@ -100,16 +100,18 @@ public class SearchingLogics {
 		
 		else if(cond.getSplit().equalsIgnoreCase(Notations.CNTS_LEFT))
 		{
-			return removingSetCntnsLeft(table, table.getAttributeIndex(cond.getName()),
+			return refiningSetContinuousLeft(table, table.getAttributeIndex(cond.getName()),
+					Double.parseDouble(	
 					cond.getValue()
-					);
+					));
 		}
 		else if(cond.getSplit().equalsIgnoreCase(Notations.CNTS_RIGHT))
 		{
 		
-			return removingSetCntnsRight(table, table.getAttributeIndex(cond.getName()),
+			return refiningSetContinuousRight(table, table.getAttributeIndex(cond.getName()),
+					Double.parseDouble(	
 					cond.getValue()
-					);
+					));
 		}
 		else
 		{
@@ -134,30 +136,6 @@ public class SearchingLogics {
 		addAttributeContents(newSet, table, attributeIndex);
 		newSet.addAllRecord(table.getRecords());
 		recordRemoval(newSet, table, attributeIndex, attrValue);
-		return newSet;
-		
-	}
-	
-	public DataTable removingSetCntnsLeft(DataTable table,int attributeIndex,String attrValue)
-	{
-		DataTable newSet = new DataTable();
-		
-		addAttributeContents(newSet, table, attributeIndex);
-		newSet.addAllRecord(table.getRecords());
-		recordRemovalCntnsLeft(newSet, table, attributeIndex, 
-				Double.parseDouble(attrValue));
-		return newSet;
-		
-	}
-	
-	public DataTable removingSetCntnsRight(DataTable table,int attributeIndex,String attrValue)
-	{
-		DataTable newSet = new DataTable();
-		
-		addAttributeContents(newSet, table, attributeIndex);
-		newSet.addAllRecord(table.getRecords());
-		recordRemovalCntnsRight(newSet, table, attributeIndex, 
-				Double.parseDouble(attrValue));
 		return newSet;
 		
 	}
@@ -215,9 +193,7 @@ public class SearchingLogics {
 			/*	newSet.addRecord(
 						new Records(oldSet.getRecordAtIndex(i))
 						);*/
-				new CommonLogics().
-					removeRecordByAttrbValue(newSet, attrbIndex, attrbValue);
-				
+				newSet.getRecords().remove(i);
 			}
 		}
 	}
@@ -261,28 +237,6 @@ public class SearchingLogics {
 		}
 	}
 	
-	private void recordRemovalCntnsLeft(DataTable newSet,DataTable oldSet,int attrbIndex,Double attrbValue)
-	{
-		CommonLogics cl = new CommonLogics();
-		
-		for(int i=0;i<oldSet.sizeOfRecords();i++)
-		{
-			if(Double.parseDouble(oldSet.searchByRowAndColumn(i, attrbIndex))
-					<(attrbValue))
-			{
-//				newSet.addRecord(
-//								cl.removeElementFromRecordDiscrete(
-//								oldSet.getRecordAtIndex(i)
-//										, attrbIndex)
-//								);
-				
-				new CommonLogics().
-				removeRecordByAttrbValue(newSet, attrbIndex, 
-						oldSet.searchByRowAndColumn(i, attrbIndex));
-			}
-		}
-	}
-	
 	private void recordRefinmentCntnsRight(DataTable newSet,DataTable oldSet,int attrbIndex,Double attrbValue)
 	{
 		CommonLogics cl = new CommonLogics();
@@ -299,28 +253,6 @@ public class SearchingLogics {
 //										, attrbIndex)
 //								);
 				newSet.addRecord(new Records(oldSet.getRecordAtIndex(i)));
-			}
-		}
-	}
-	
-	private void recordRemovalCntnsRight(DataTable newSet,DataTable oldSet,int attrbIndex,Double attrbValue)
-	{
-		CommonLogics cl = new CommonLogics();
-		
-		for(int i=0;i<oldSet.sizeOfRecords();i++)
-		{
-			
-			if(Double.parseDouble(oldSet.searchByRowAndColumn(i, attrbIndex))
-					>=(attrbValue))
-			{
-//				newSet.addRecord(
-//								cl.removeElementFromRecordDiscrete(
-//								oldSet.getRecordAtIndex(i)
-//										, attrbIndex)
-//								);
-				new CommonLogics().
-				removeRecordByAttrbValue(newSet, attrbIndex,
-						oldSet.searchByRowAndColumn(i, attrbIndex));
 			}
 		}
 	}
