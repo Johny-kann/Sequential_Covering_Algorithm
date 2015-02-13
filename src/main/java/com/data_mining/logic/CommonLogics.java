@@ -1,6 +1,8 @@
 package com.data_mining.logic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -147,20 +149,57 @@ public class CommonLogics {
 		
 	}
 	
-	public DataTable removeRecords(DataTable input,DataTable remover)
+	public void removeRecords(DataTable input,DataTable remover)
 	{
-		List<Records> recs = remover.getRecords();
-		DataTable freshDataTable=null;
-		try {
-			freshDataTable = input.clone();
-		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		ArrayList<Integer> array = new ArrayList<Integer>();
+		
+		for(int i=0;i<remover.sizeOfRecords();i++)
+		{
+			for(int j=0;j<input.sizeOfRecords();j++)
+			{
+				if(equalRecords(input.getRecordAtIndex(j),
+						remover.getRecordAtIndex(i)))
+				{
+				array.add(j);
+				}
+			}
 		}
 		
-		freshDataTable.getRecords().removeAll(remover.getRecords());
-		return freshDataTable;
+		Collections.sort(array);
+		Collections.reverse(array);
+		
+		
+		for(int i:array)
+		{
+			input.getRecords().remove(i);
+		}
+		
+		
 	}
+	
+	public boolean equalRecords(Records rec1,Records rec2)
+	{
+		Boolean good=true;
+		
+		for(int i=0;i<rec1.getElements().size();i++)
+		{
+			if(rec1.getElements().get(i)!=rec2.getElements().get(i))
+			{
+				good=false;
+				break;
+			}
+		}
+		
+		if(rec1.getClassAttribute()!=rec2.getClassAttribute())
+		{
+			good=false;
+			
+		}
+		
+		return good;
+	}
+	
+	
 	
 	public void removeRecordByAttrbValue(DataTable table,int index,String value)
 	{

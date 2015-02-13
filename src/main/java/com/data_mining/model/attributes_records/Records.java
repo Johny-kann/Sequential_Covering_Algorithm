@@ -8,7 +8,7 @@ import java.util.List;
  * @author Janakiraman
  *
  */
-public class Records
+public class Records implements Cloneable
 {
 	private List<String> elements;
 	private String classAttribute;
@@ -34,6 +34,14 @@ public class Records
 		}
 	}
 	
+	public Records clone() throws CloneNotSupportedException {
+	      
+		Records clonedCustomer = (Records) super.clone();
+	 
+	      // Clone the object referenced objects
+	      
+	      return clonedCustomer;
+	   }
 	
 	/**
 	 * @return list of element

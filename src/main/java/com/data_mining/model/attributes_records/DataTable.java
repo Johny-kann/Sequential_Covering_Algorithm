@@ -1,9 +1,13 @@
 package com.data_mining.model.attributes_records;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+
 
 
 
@@ -35,12 +39,22 @@ public class DataTable implements Cloneable {
 	
 	@Override
 	public DataTable clone() throws CloneNotSupportedException {
-	      DataTable clonedCustomer = (DataTable) super.clone();
-	 
-	      // Clone the object referenced objects
 	      
+		DataTable clonedCustomer = new DataTable();
+		
+		for(AttributesSpecifications attr:attributes)
+		{
+			clonedCustomer.addAttribute(attr.getName(), attr.getType(), attr.getValues());
+		}
+		
+		for(Records rec:records)
+		{
+			clonedCustomer.addRecord(rec);
+		}
+	       
 	      return clonedCustomer;
 	   }
+	
 	/**
 	 * Gives number of Records
 	 * @return no of records

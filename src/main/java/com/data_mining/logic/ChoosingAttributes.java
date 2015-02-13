@@ -50,13 +50,26 @@ public class ChoosingAttributes {
 		
 		for(int i=0;i<set.getClassesAlone().size();i++)
 		{
-			index = extractRule(input, ruleSet, set.getClassAtIndex(i), index);
+			if(i == set.getClassesAlone().size()-1)
+			{
+				ruleSet.addRules(defaultRule(set.getClassAtIndex(i)
+						, index));
+			
+			}
+			else
+			{
+				index = extractRule(input, ruleSet, set.getClassAtIndex(i), index);
+				
+			}
 		}
-		
+
 		return ruleSet;
 	}
 	
-	
+	public Rules defaultRule(String category,int index)
+	{
+		return new Rules(index, category);
+	}
 	
 	public int extractRule(DataTable input,RuleSet ruleset,String category,int index)
 	{
@@ -78,12 +91,16 @@ public class ChoosingAttributes {
 
 			
 			reserve = refineCoveredRules(temp, rule);
+			if(reserve.sizeOfRecords()==0)
+			{
+				break;
+			}
 			new Outputs().outPutTable(reserve);
 			
 			CommonLogics cl = new CommonLogics();
 			System.out.println("\n");
-			temp = cl.removeRecords(temp, reserve);
-			new Outputs().outPutTable(temp);
+			cl.removeRecords(temp, reserve);
+	//		new Outputs().outPutTable(temp);
 
 			ruleset.addRules(rule);
 			index++;
@@ -135,7 +152,7 @@ public Rules addRule(DataTable input,String category,int index)
 		while(run)
 		{
 			
-			System.out.println(pastMeasure);
+	//		System.out.println(pastMeasure);
 			RuleCondition rc;
 			try
 			{
@@ -144,8 +161,8 @@ public Rules addRule(DataTable input,String category,int index)
 			
 			if(newMeasure>pastMeasure)
 			{
-				System.out.println(newMeasure+"new");
-				System.out.println(pastMeasure+"old");
+	//			System.out.println(newMeasure+"new");
+	//			System.out.println(pastMeasure+"old");
 			
 			ruleRecord.addRule(rc);
 
@@ -157,7 +174,7 @@ public Rules addRule(DataTable input,String category,int index)
 			if(temp.sizeOfRecords()==0)
 			{
 			run = false;
-			System.out.println(temp.sizeOfRecords());
+	//		System.out.println(temp.sizeOfRecords());
 			}
 			else
 			{

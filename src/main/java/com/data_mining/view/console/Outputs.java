@@ -63,7 +63,16 @@ public class Outputs {
 		StringBuffer str = new StringBuffer();
 		for(int i=0;i<ruleSet.getRulesList().size();i++)
 		{
-		  str.append(outputRule(ruleSet.getRulesList().get(i)));
+			try
+			{
+				str.append(outputRule(ruleSet.getRulesList().get(i)));
+				str.append(" --> "+ruleSet.getRulesList().get(i).getCategory());
+			}catch(IndexOutOfBoundsException ie)
+			{
+			//	System.out.println("Index out of bound");
+				str.append("{}");
+				str.append(" --> "+ruleSet.getRulesList().get(i).getCategory());
+			}
 		  str.append(System.lineSeparator());
 		}
 		

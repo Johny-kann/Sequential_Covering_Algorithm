@@ -95,6 +95,10 @@ public class MainController {
 	public DataTable getTestAttributes() {
 		return testData;
 	}
+
+	public OrderedClassSet getSortedClassSet() {
+		return sortedClassSet;
+	}
 	
 	
 }
