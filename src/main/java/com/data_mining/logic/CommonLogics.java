@@ -147,6 +147,17 @@ public class CommonLogics {
 		
 	}
 	
+	public void removeRecordByAttrbValue(DataTable table,int index,String value)
+	{
+		for(int i=0;i<table.sizeOfRecords();i++)
+		{
+			if(table.getRecordAtIndex(i).getElementValueAtIndex(index)==value)
+			{
+				table.getRecords().remove(i);
+			}
+		}
+	}
+	
 	/**
 	 * sorts the table according to the attribute index
 	 * @param table
