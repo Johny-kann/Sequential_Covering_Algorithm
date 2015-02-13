@@ -21,11 +21,7 @@ public class SmallClass {
 		
 	public static void main(String[] args) 
 	{
-	 Map<String,Integer> map = new LinkedHashMap<String, Integer>();
-	 map.put("First", 1);
-	 map.put("Second", 2);
-	 map.put("Third", 3);
-	 
-	 System.out.println(new CommonLogics().getValueofMapAtIndex(map, 2));
+	List<Integer> hell = new ArrayList<Integer>();
+	
 	}
 }
