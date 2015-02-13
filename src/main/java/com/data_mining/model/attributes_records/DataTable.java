@@ -22,18 +22,13 @@ public class DataTable implements Cloneable {
 //	private Map<String, String> attributeNameAndType;
 	private List<AttributesSpecifications> attributes;
 	
-	private Integer numberOfRecords;
-	private Integer numberOfAttributes;
-	
-	
 	private List<Records> records;
 	
 	public DataTable()
 	{
 	//	attributeNameAndType = new LinkedHashMap<String, String>();
 		attributes = new ArrayList<AttributesSpecifications>();
-		numberOfAttributes = 0;
-		numberOfRecords = 0;
+		
 		records = new ArrayList<Records>();
 		
 	}
@@ -61,12 +56,12 @@ public class DataTable implements Cloneable {
 	 */
 	public Integer numberOfAttributes()
 	{
-		return numberOfAttributes-1;
+		return attributes.size()-1;
 	}
 	
 	public Integer totColumns()
 	{
-		return numberOfAttributes;
+		return attributes.size();
 	}
 	
 	/**
@@ -78,7 +73,7 @@ public class DataTable implements Cloneable {
 	{
 		//attributeNameAndType.put(name, type);
 		attributes.add(new AttributesSpecifications(name, type, values));
-		numberOfAttributes++;
+		
 	}
 	
 	
@@ -118,7 +113,7 @@ public class DataTable implements Cloneable {
 	 * @return
 	 */
 	public String getClassName() {
-		return attributes.get(numberOfAttributes-1).getName();
+		return attributes.get(attributes.size()-1).getName();
 	}
 
 
@@ -127,7 +122,7 @@ public class DataTable implements Cloneable {
 	 * @return Gives class type
 	 */
 	public String getClassType() {
-		return attributes.get(numberOfAttributes-1).getType();
+		return attributes.get(attributes.size()-1).getType();
 	}
 
 	public List<String> getClassValues()
@@ -177,7 +172,12 @@ public class DataTable implements Cloneable {
 	{
 		
 		records.add(record);
-		numberOfRecords++;
+		
+	}
+	
+	public void addAllRecord(List<Records> records)
+	{
+		records.addAll(records);
 	}
 
 	/**
@@ -189,7 +189,7 @@ public class DataTable implements Cloneable {
 	{
 		Records record = new Records(elems, category);
 		records.add(record);
-		numberOfRecords++;
+		
 	}
 
 	public String searchByRowAndColumn(int row,int col)

@@ -2,6 +2,7 @@ package com.data_mining.view.console;
 
 import com.data_mining.model.attributes_records.DataTable;
 import com.data_mining.model.rules.RuleCondition;
+import com.data_mining.model.rules.RuleSet;
 import com.data_mining.model.rules.Rules;
 
 public class Outputs {
@@ -55,6 +56,18 @@ public class Outputs {
 			}
 		}
 		return str;
+	}
+	
+	public String outputRuleSet(RuleSet ruleSet)
+	{
+		StringBuffer str = new StringBuffer();
+		for(int i=0;i<ruleSet.getRulesList().size();i++)
+		{
+		  str.append(outputRule(ruleSet.getRulesList().get(i)));
+		  str.append(System.lineSeparator());
+		}
+		
+		return str.toString();
 	}
 	
 	public String outputRule(Rules rule)

@@ -8,6 +8,8 @@ import com.data_mining.model.attributes_records.AttributesSpecifications;
 import com.data_mining.model.attributes_records.DataTable;
 import com.data_mining.model.attributes_records.Records;
 import com.data_mining.model.rules.RuleCondition;
+import com.data_mining.model.rules.Rules;
+import com.data_mining.view.console.Outputs;
 
 /**
  * @author Janakiraman
@@ -88,11 +90,61 @@ public class SearchingLogics {
 		 
 	}
 	
+	public DataTable refiningSetBasedForNextRule(DataTable table,RuleCondition cond)
+	{
+		if(cond.getSplit().equalsIgnoreCase(Notations.DISCRETE_EQUAL))
+		{
+			return removingSet(table, table.getAttributeIndex(cond.getName())
+					, cond.getValue());
+		}
+		
+		else if(cond.getSplit().equalsIgnoreCase(Notations.CNTS_LEFT))
+		{
+			return refiningSetContinuousLeft(table, table.getAttributeIndex(cond.getName()),
+					Double.parseDouble(	
+					cond.getValue()
+					));
+		}
+		else if(cond.getSplit().equalsIgnoreCase(Notations.CNTS_RIGHT))
+		{
+		
+			return refiningSetContinuousRight(table, table.getAttributeIndex(cond.getName()),
+					Double.parseDouble(	
+					cond.getValue()
+					));
+		}
+		else
+		{
+			System.out.println("Splitting condition dint match");
+			return null;
+		}
+	}
+	
+	/*public DataTable refiningSet(DataTable table,int attributeIndex,String attrValue)
+	{
+		DataTable newSet = new DataTable();
+		addAttributeContents(newSet, table, attributeIndex);
+		recordRefinment(newSet, table, attributeIndex, attrValue);
+		return newSet;
+		
+	}*/
+	
+	public DataTable removingSet(DataTable table,int attributeIndex,String attrValue)
+	{
+		DataTable newSet = new DataTable();
+		
+		addAttributeContents(newSet, table, attributeIndex);
+		newSet.addAllRecord(table.getRecords());
+		recordRemoval(newSet, table, attributeIndex, attrValue);
+		return newSet;
+		
+	}
+	
 	public DataTable refiningSetDiscrete(DataTable table,int attributeIndex,String attrValue)
 	{
 		DataTable newSet = new DataTable();
 		addAttributeContentsDiscrete(newSet, table, attributeIndex);
-		recordRefinment(newSet, table, attributeIndex, attrValue);
+		recordRefinmentDiscrete(newSet, table, attributeIndex, attrValue);
 		return newSet;
 		
 	}
@@ -100,7 +152,7 @@ public class SearchingLogics {
 	public DataTable refiningSetContinuousLeft(DataTable table,int attributeIndex,Double attrValue)
 	{
 		DataTable newSet = new DataTable();
-		addAttributeContentsContinuous(newSet, table, attributeIndex);
+		addAttributeContents(newSet, table, attributeIndex);
 		recordRefinmentCntnsLeft(newSet, table, attributeIndex, attrValue);
 		return newSet;
 		
@@ -109,13 +161,44 @@ public class SearchingLogics {
 	public DataTable refiningSetContinuousRight(DataTable table,int attributeIndex,Double attrValue)
 	{
 		DataTable newSet = new DataTable();
-		addAttributeContentsContinuous(newSet, table, attributeIndex);
+		addAttributeContents(newSet, table, attributeIndex);
+
 		recordRefinmentCntnsRight(newSet, table, attributeIndex, attrValue);
 		return newSet;
 		
 	}
 	
 	private void recordRefinment(DataTable newSet,DataTable oldSet,int attrbIndex,String attrbValue)
+	{
+		CommonLogics cl = new CommonLogics();
+		
+		for(int i=0;i<oldSet.sizeOfRecords();i++)
+		{
+			if(oldSet.searchByRowAndColumn(i, attrbIndex).equals(attrbValue))
+			{
+				newSet.addRecord(
+						new Records(oldSet.getRecordAtIndex(i))
+						);
+			}
+		}
+	}
+	
+	private void recordRemoval(DataTable newSet,DataTable oldSet,int attrbIndex,String attrbValue)
+	{
+		
+		for(int i=0;i<oldSet.sizeOfRecords();i++)
+		{
+			if((oldSet.searchByRowAndColumn(i, attrbIndex).equals(attrbValue)))
+			{
+			/*	newSet.addRecord(
+						new Records(oldSet.getRecordAtIndex(i))
+						);*/
+				newSet.getRecords().remove(i);
+			}
+		}
+	}
+	
+	private void recordRefinmentDiscrete(DataTable newSet,DataTable oldSet,int attrbIndex,String attrbValue)
 	{
 		CommonLogics cl = new CommonLogics();
 		
@@ -160,6 +243,7 @@ public class SearchingLogics {
 		
 		for(int i=0;i<oldSet.sizeOfRecords();i++)
 		{
+			
 			if(Double.parseDouble(oldSet.searchByRowAndColumn(i, attrbIndex))
 					>=(attrbValue))
 			{
@@ -188,7 +272,18 @@ public class SearchingLogics {
 		
 	}
 	
-	public void addAttributeContentsContinuous(DataTable newSet,DataTable oldSet, int attrbIndex)
+/*	public DataTable extractDataBasedOnRule(DataTable input,Rules rule)
+	{
+		for(RuleCondition cond:rule.getRules())
+		{
+			
+		}
+	//	refiningSetBasedonRuleCondition(input, rule.get)
+		
+	} 
+	*/
+	
+	public void addAttributeContents(DataTable newSet,DataTable oldSet, int attrbIndex)
 	{
 			for(int i=0;i<oldSet.totColumns();i++)
 			{

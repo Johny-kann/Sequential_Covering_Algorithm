@@ -5,6 +5,7 @@ import org.hibernate.type.OrderedSetType;
 import com.data_mining.constants.FilesList;
 import com.data_mining.file_readers.TextFileWriter;
 import com.data_mining.logic.AttributeAndRecordLoaders;
+import com.data_mining.logic.ChoosingAttributes;
 import com.data_mining.logic.CommonLogics;
 import com.data_mining.logic.SearchingLogics;
 import com.data_mining.model.attributes_records.DataTable;
@@ -27,6 +28,7 @@ public class MainController {
 	DataTable trainData;
 	DataTable testData;
 	RuleSet mainRuleSet;
+	OrderedClassSet sortedClassSet;
 	
 	public MainController()
 	{
@@ -53,11 +55,14 @@ public class MainController {
 	{
 		CommonLogics cl = new CommonLogics();
 
-		OrderedClassSet classes = new OrderedClassSet(
+		sortedClassSet = new OrderedClassSet(
 				cl.sortMapValues
 				(cl.classAndCounts(trainData))
 				);
-		System.out.println(classes.getOrderedClasses());
+	//	System.out.println(classes.getOrderedClasses());
+	ChoosingAttributes choose = new ChoosingAttributes(trainData);
+	choose.fillRuleSet(trainData, sortedClassSet);
+	
 	}
 	
 	/*public void testData()

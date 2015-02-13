@@ -118,6 +118,13 @@ public class CommonLogics {
 	}
 	
 	
+	public Integer getValueofMapAtIndex(Map<String,Integer> map,int index)
+	{
+		Set<String> keys = map.keySet();
+		return map.get(keys.toArray()[index]);
+		
+	}
+	
 	/**
 	 * Total classes and their counts
 	 * @param table

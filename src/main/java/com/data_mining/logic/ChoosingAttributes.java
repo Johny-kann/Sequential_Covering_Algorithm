@@ -42,25 +42,63 @@ public class ChoosingAttributes {
 		numOfAttributes= input.numberOfAttributes();
 	}
 	
-/*	public RuleSet fillRuleSet(DataTable input,OrderedClassSet set)
+	public RuleSet fillRuleSet(DataTable input,OrderedClassSet set)
 	{
 		RuleSet ruleSet = new RuleSet();
 		
-		for(int i=0;i<ruleSet.sizeOfRuleSet()-1;i++)
+		int index = 0;
+		
+		for(int i=0;i<set.getClassesAlone().size();i++)
 		{
-			
+			index = extractRule(input, ruleSet, set.getClassAtIndex(i), index);
 		}
+		
+		return ruleSet;
 	}
 	
-	*/
 	
-	public RuleSet extractRule(DataTable input,RuleSet ruleset,String category)
+	
+	public int extractRule(DataTable input,RuleSet ruleset,String category,int index)
 	{
 			
 	//	Rules rules = new Rules(index, category);
+		DataTable temp = input;
 		
+		while(temp.sizeOfRecords()!=0)
+		{
+			
+			Rules rule = addRule(temp, category, index);
+			System.out.println("After Rule decided");
+//			new Outputs().outPutTable(temp);
+			temp = removeCoveredRules(temp, rule);
+			new Outputs().outPutTable(temp);
+			ruleset.addRules(rule);
+			index++;
+		}
+		
+		return index;
 	}
 	
+	public DataTable removeCoveredRules(DataTable input,Rules rule)
+	{
+		DataTable temp = null;
+		try {
+			temp = input.clone();
+		} catch (CloneNotSupportedException e) {
+		
+			e.printStackTrace();
+		}
+		for(RuleCondition cond:rule.getRules())
+		{
+			if(temp.numberOfAttributes()!=0)
+			{
+			
+			temp = new SearchingLogics().
+				refiningSetBasedForNextRule(temp, cond);
+			}
+		}
+		return temp;
+	}
 	
 public Rules addRule(DataTable input,String category,int index)
 	{
@@ -124,15 +162,9 @@ public Rules addRule(DataTable input,String category,int index)
 				run = false;
 				System.out.println("Index Out of Bound");
 			}
-			
-			
-			
+		
 }
-		
-	
-		
-		
-	//	System.out.println(rc.getCondition()+rc.getError());
+
 		System.out.println(
 				new Outputs().outputRule(ruleRecord));
 		
