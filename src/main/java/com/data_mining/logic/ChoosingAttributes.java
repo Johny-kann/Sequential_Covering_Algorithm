@@ -54,7 +54,7 @@ public class ChoosingAttributes {
 			if(i == set.getClassesAlone().size()-1)
 			{
 				ruleSet.addRules(defaultRule(set.getClassAtIndex(i)
-						, index));
+						, index,validation));
 			
 			}
 			else
@@ -65,9 +65,9 @@ public class ChoosingAttributes {
 		return ruleSet;
 	}
 	
-	public Rules defaultRule(String category,int index)
+	public Rules defaultRule(String category,int index,DataTable val)
 	{
-		return new Rules(index, category);
+		return new Rules(index, category,laplaceForTable(val, category));
 	}
 	
 	public int extractRule(DataTable input,RuleSet ruleset,String category,int index,DataTable validation)
@@ -87,21 +87,18 @@ public class ChoosingAttributes {
 			DataTable reserve;
 			Rules rule = addRule(temp, category, index);
 		
-
-			
 			reserve = refineCoveredRules(temp, rule);
 			if(reserve.sizeOfRecords()==0)
 			{
 				break;
 			}
-			new Outputs().outPutTable(reserve);
-			
+				
 			CommonLogics cl = new CommonLogics();
 	
 			cl.removeRecords(temp, reserve);
 	//		new Outputs().outPutTable(temp);
 			
-			pruneTheRule(rule, validation);
+			rule = pruneTheRule(rule, validation);
 
 			ruleset.addRules(rule);
 			index++;
@@ -110,7 +107,7 @@ public class ChoosingAttributes {
 		return index;
 	}
 	
-	public void pruneTheRule(Rules rule,DataTable validationTable)
+	public Rules pruneTheRule(Rules rule,DataTable validationTable)
 	{
 			 
 		Rules newRule = null;
@@ -132,17 +129,29 @@ public class ChoosingAttributes {
 			newRule.getRules().remove(i);
 			
 			temp = refineCoveredRules(validationTable, newRule);
-			Double newgError = 1 - laplaceForTable(validationTable, newRule.getCategory());
+			Double newgError = 1 - laplaceForTable(temp, newRule.getCategory());
 			
+	
 			if(newgError<gError)
 			{
-			rule = newRule;
+		//		System.out.println("Hell");
+				
+			try {
+				rule = newRule.clone();
+			} catch (CloneNotSupportedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 			gError = newgError;
 			}
+			
+			
 		}
 		
+		rule.setgError(gError);
 		
-		
+	return rule;
 	}
 	
 	public DataTable refineCoveredRules(DataTable input,Rules rule)
@@ -175,7 +184,7 @@ public Rules addRule(DataTable input,String category,int index)
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		new Outputs().outPutTable(temp);
+	
 		Rules ruleRecord = new Rules(index, category);
 		
 		Double pastMeasure = laplaceForTable(input, category);
@@ -187,8 +196,7 @@ public Rules addRule(DataTable input,String category,int index)
 		
 		while(run)
 		{
-			
-	//		System.out.println(pastMeasure);
+	
 			RuleCondition rc;
 			try
 			{
@@ -197,20 +205,16 @@ public Rules addRule(DataTable input,String category,int index)
 			
 			if(newMeasure>pastMeasure)
 			{
-	//			System.out.println(newMeasure+"new");
-	//			System.out.println(pastMeasure+"old");
-			
+	
 			ruleRecord.addRule(rc);
 
 			
 			temp = sl.refiningSetBasedonRuleCondition(temp, rc);
 		
-			new Outputs().outPutTable(temp);
-			
 			if(temp.sizeOfRecords()==0)
 			{
 			run = false;
-	//		System.out.println(temp.sizeOfRecords());
+	
 			}
 			else
 			{

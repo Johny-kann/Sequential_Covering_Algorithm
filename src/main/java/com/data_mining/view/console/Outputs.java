@@ -66,12 +66,12 @@ public class Outputs {
 			try
 			{
 				str.append(outputRule(ruleSet.getRulesList().get(i)));
-				str.append(" --> "+ruleSet.getRulesList().get(i).getCategory());
+				str.append(" --> "+ruleSet.getRulesList().get(i).getCategory()+" error "+ruleSet.getRulesList().get(i).getgError());
 			}catch(IndexOutOfBoundsException ie)
 			{
 			//	System.out.println("Index out of bound");
 				str.append("{}");
-				str.append(" --> "+ruleSet.getRulesList().get(i).getCategory());
+				str.append(" --> "+ruleSet.getRulesList().get(i).getCategory()+" error "+ruleSet.getRulesList().get(i).getgError());
 			}
 		  str.append(System.lineSeparator());
 		}

@@ -5,15 +5,24 @@ import java.util.List;
 
 public class Rules implements Cloneable
 {
-	Integer ruleNumber;
-	List<RuleCondition> rules;
-	String category;
+	private Integer ruleNumber;
+	private List<RuleCondition> rules;
+	private String category;
+	private Double gError;
 	
 	public Rules(int index,String clas)
 	{
 		ruleNumber = index;
 		category = clas;
 		rules = new ArrayList<RuleCondition>();
+	}
+	
+	public Rules(int index,String clas,Double gError)
+	{
+		ruleNumber = index;
+		category = clas;
+		rules = new ArrayList<RuleCondition>();
+		this.gError = gError;
 	}
 	
 	@Override
@@ -50,6 +59,14 @@ public class Rules implements Cloneable
 	}
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public Double getgError() {
+		return gError;
+	}
+
+	public void setgError(Double gError) {
+		this.gError = gError;
 	}
 	
 	

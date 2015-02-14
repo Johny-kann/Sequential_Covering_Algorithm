@@ -22,33 +22,13 @@ public class SmallClass {
 		
 	public static void main(String[] args) 
 	{
-	MainController mc = new MainController();
-	mc.loadAttributesAndRecords();
-	DataTable table1 = mc.getTrainAttributes();
-	
-	DataTable table2 = null;
-	try {
-		table2 = table1.clone();
-	} catch (CloneNotSupportedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
-	 table2.getRecords().remove(1
-			 );
-	 table2.getRecords().remove(2
-			 );
-	
-	 new Outputs().outPutTable(table1);
-	 new Outputs().outPutTable(table2);
-	 
-	 new CommonLogics().removeRecords(table1, table2);
-	 
-	 System.out.println(table1.sizeOfRecords());
-	 System.out.println(table2.sizeOfRecords());
-	 
-	 new Outputs().outPutTable(table1);
-	 new Outputs().outPutTable(table2);
+		Double t1 =0.2;
+		Double t2 =0.3;
+
+		if(t1<t2)
+		{
+			System.out.println("Hell");
+		}
 	 
 	}
 }
