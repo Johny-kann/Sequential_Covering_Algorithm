@@ -494,4 +494,32 @@ public Rules addRule(DataTable input,String category,int index)
 		return error.laplace(correctClass, noOfRecords, classValues);
 		
 	}
+	
+	public double AccuracyForTableByRuleSet(DataTable table,RuleSet rule)
+	{
+		SearchingLogics sl = new SearchingLogics();
+		int correct=0;
+		int wrong = 0;
+		for(Rules rr:rule.getRulesList())
+		{
+			
+			DataTable temp = refineCoveredRules(table, rr);
+			
+			for(String val:temp.getClassValues())
+			{
+				if(val.equals(rr.getCategory()))
+				{
+					correct+=temp.getCountOfAClassValues(val);
+					rr.setCorrectClass(temp.getCountOfAClassValues(val));
+				}
+				else
+				{	
+					wrong+=temp.getCountOfAClassValues(val);
+					rr.addWrongClass(temp.getCountOfAClassValues(val));
+				}
+			}
+		}
+		
+		return (double)correct/(wrong+correct);
+	}
 }

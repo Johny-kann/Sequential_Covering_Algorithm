@@ -17,6 +17,8 @@ public class Rules implements Cloneable
 		ruleNumber = index;
 		category = clas;
 		rules = new ArrayList<RuleCondition>();
+		wrongClass = 0;
+		correctClass = 0;
 	}
 	
 	public Rules(int index,String clas,Double gError)
@@ -85,6 +87,18 @@ public class Rules implements Cloneable
 
 	public void setWrongClass(Integer wrongClass) {
 		this.wrongClass = wrongClass;
+	}
+
+	public void addWrongClass(Integer wrongClass) {
+		// TODO Auto-generated method stub
+		this.wrongClass+=wrongClass;
+		
+	}
+	
+	public void addCorrectClass(Integer correctClass) {
+		// TODO Auto-generated method stub
+		this.correctClass+=correctClass;
+		
 	}
 	
 	
