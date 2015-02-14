@@ -1,27 +1,16 @@
 package com.data_mining.logic;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import sun.misc.GC.LatencyRequest;
-import javafx.scene.chart.PieChart.Data;
-
 import com.data_mining.constants.Notations;
 import com.data_mining.model.attributes_records.DataTable;
 import com.data_mining.model.attributes_records.OrderedClassSet;
-import com.data_mining.model.errors.ErrorModel;
-import com.data_mining.model.errors.ErrorModelList;
-import com.data_mining.model.errors.PassingAttribute;
-import com.data_mining.model.nodes.RootTreeNode;
-import com.data_mining.model.nodes.TreeNodes;
 import com.data_mining.model.rules.RuleCondition;
 import com.data_mining.model.rules.RuleSet;
 import com.data_mining.model.rules.Rules;
-import com.data_mining.view.console.Outputs;
+
 
 /**
  * @author Janakiraman
@@ -73,7 +62,7 @@ public class ChoosingAttributes {
 	public int extractRule(DataTable input,RuleSet ruleset,String category,int index,DataTable validation)
 	{
 			
-	//	Rules rules = new Rules(index, category);
+	
 		DataTable temp=null;
 		try {
 			temp = input.clone();
@@ -96,12 +85,19 @@ public class ChoosingAttributes {
 			CommonLogics cl = new CommonLogics();
 	
 			cl.removeRecords(temp, reserve);
-	//		new Outputs().outPutTable(temp);
+	
 			
 			rule = pruneTheRule(rule, validation);
 
+			if(rule.getgError()<0.5)
+			{
 			ruleset.addRules(rule);
 			index++;
+			}
+			else
+			{
+				break;
+			}
 		}
 		
 		return index;

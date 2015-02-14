@@ -24,6 +24,8 @@ import com.data_mining.model.attributes_records.Records;
 import com.data_mining.model.errors.ErrorModelList;
 import com.data_mining.model.errors.PassingAttribute;
 import com.data_mining.model.rules.RuleCondition;
+import com.data_mining.model.rules.RuleSet;
+import com.data_mining.model.rules.Rules;
 
 /**
  * @author Janakiraman
@@ -240,6 +242,28 @@ public class CommonLogics {
 			}
 		}
 	}
+	
+	
+	public void sortRulesBasedonGeneralizationError(RuleSet ruleSet)
+	{
+	 
+		List<Rules> temp = ruleSet.getRulesList();
+		
+		for(int i=0;i<temp.size();i++)
+		{
+			for(int j=i;j<temp.size();j++)
+			{
+				if(temp.get(i).getgError()>temp.get(j).getgError())
+				{
+					Collections.swap(temp, i, j);
+					
+				}
+			}
+		}
+		
+		
+	}
+	
 	
 	
 	/**
