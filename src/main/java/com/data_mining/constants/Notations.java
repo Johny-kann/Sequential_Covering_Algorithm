@@ -28,4 +28,6 @@ public class Notations {
 	public static Double VALIDATION_PERCENT = 70.0;
 	
 	public static String DEFAULT_CLASS;
+	
+	public static Boolean VALIDATION_ON = false;
 }

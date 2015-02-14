@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.data_mining.constants.Notations;
 import com.data_mining.model.attributes_records.DataTable;
 import com.data_mining.model.attributes_records.OrderedClassSet;
 import com.data_mining.model.rules.RuleCondition;
 import com.data_mining.model.rules.RuleSet;
 import com.data_mining.model.rules.Rules;
+import com.data_mining.view.console.Outputs;
 
 
 /**
@@ -86,7 +88,8 @@ public class ChoosingAttributes {
 	
 			cl.removeRecords(temp, reserve);
 	
-			
+		if(Notations.VALIDATION_ON)
+		{
 			rule = pruneTheRule(rule, validation);
 
 			if(rule.getgError()<0.5)
@@ -98,6 +101,12 @@ public class ChoosingAttributes {
 			{
 				break;
 			}
+		}
+		else
+		{
+			ruleset.addRules(rule);
+			index++;
+		}
 		}
 		
 		return index;
@@ -128,10 +137,14 @@ public class ChoosingAttributes {
 			Double newgError = 1 - laplaceForTable(temp, newRule.getCategory());
 			
 	
+			System.out.println(newgError+","+gError);
 			if(newgError<gError)
 			{
 		//		System.out.println("Hell");
-				
+				System.out.println(new Outputs().outputRule(rule)
+						);
+				System.out.println(new Outputs().outputRule(newRule)
+						);
 			try {
 				rule = newRule.clone();
 			} catch (CloneNotSupportedException e) {

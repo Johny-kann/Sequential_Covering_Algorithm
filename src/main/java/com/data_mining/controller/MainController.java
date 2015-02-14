@@ -1,8 +1,11 @@
 package com.data_mining.controller;
 
+import java.util.Map;
+
 import org.hibernate.type.OrderedSetType;
 
 import com.data_mining.constants.FilesList;
+import com.data_mining.constants.Notations;
 import com.data_mining.file_readers.TextFileWriter;
 import com.data_mining.logic.AttributeAndRecordLoaders;
 import com.data_mining.logic.ChoosingAttributes;
@@ -54,22 +57,43 @@ public class MainController {
 	{
 		CommonLogics cl = new CommonLogics();
 
+		
+	//	System.out.println(classes.getOrderedClasses());
+	ChoosingAttributes choose = new ChoosingAttributes(trainData);
+	if(Notations.VALIDATION_ON)
+	{
 		sortedClassSet = new OrderedClassSet(
 				cl.sortMapValues
 				(cl.classAndCounts(trainData))
 				);
-	//	System.out.println(classes.getOrderedClasses());
-	ChoosingAttributes choose = new ChoosingAttributes(trainData);
-	choose.fillRuleSet(trainData, sortedClassSet,testData);
+	mainRuleSet = choose.fillRuleSet(trainData, sortedClassSet,testData);
+	}else
+	{
+	//	System.out.println(mainAttributes.sizeOfRecords()+","+trainData.sizeOfRecords()+","+testData.sizeOfRecords());
+		Map<String,Integer> map = cl.classAndCounts(mainAttributes);
+		
+	
+		sortedClassSet = new OrderedClassSet(
+				cl.sortMapValues
+				(map)
+				);
+		
+		System.out.println(sortedClassSet.getClassesAlone()
+				);
+		mainRuleSet = choose.fillRuleSet(mainAttributes, sortedClassSet,testData);
+	}
 	
 	}
 	
+	public void orderBasedOnGeneralError()
+	{
+		new CommonLogics().sortRulesBasedonGeneralizationError(mainRuleSet);
+		
+	}
 	
 	public void output()
 	{
-		System.out.println(mainAttributes.getClassName());
-		System.out.println(mainAttributes.sizeOfRecords());
-		System.out.println(mainAttributes.numberOfAttributes());
+		System.out.println(new Outputs().outputRuleSet(mainRuleSet));
 	}
 	
 	public DataTable getMainTable()

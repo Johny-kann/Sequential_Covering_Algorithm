@@ -2,6 +2,7 @@ package tester;
 
 import java.util.Map;
 
+import com.data_mining.constants.Notations;
 import com.data_mining.controller.MainController;
 import com.data_mining.logic.ChoosingAttributes;
 import com.data_mining.logic.CommonLogics;
@@ -12,19 +13,22 @@ public class Tester {
 
 	public static void main(String args[])
 	{
+		Notations.VALIDATION_ON = true;
 		MainController mc = new MainController();
 		mc.loadAttributesAndRecords();
 		mc.fillRuleSet();
+		/*
 		ChoosingAttributes choosAttrb = new ChoosingAttributes(mc.getMainTable());
 		
 		RuleSet rule = new RuleSet();
 		
-		rule = choosAttrb.fillRuleSet(mc.getMainTable(), mc.getSortedClassSet(),mc.getTestAttributes());
+		rule = choosAttrb.fillRuleSet(mc.getTrainAttributes(), mc.getSortedClassSet(),mc.getTestAttributes());
 		System.out.println("The Rules are ");
 		System.out.println(mc.getSortedClassSet().getClassesAlone());
 		System.out.println(new Outputs().outputRuleSet(rule));
-		new CommonLogics().sortRulesBasedonGeneralizationError(rule);
+	//	new CommonLogics().sortRulesBasedonGeneralizationError(rule);
 		System.out.println(new Outputs().outputRuleSet(rule));
-		
+*/		
+		mc.output();
 	}
 }

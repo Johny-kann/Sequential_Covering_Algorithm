@@ -1,5 +1,6 @@
 package com.data_mining.view.console;
 
+import com.data_mining.constants.Notations;
 import com.data_mining.model.attributes_records.DataTable;
 import com.data_mining.model.rules.RuleCondition;
 import com.data_mining.model.rules.RuleSet;
@@ -66,12 +67,12 @@ public class Outputs {
 			try
 			{
 				str.append(outputRule(ruleSet.getRulesList().get(i)));
-				str.append(" --> "+ruleSet.getRulesList().get(i).getCategory()+" error "+ruleSet.getRulesList().get(i).getgError());
+				str.append(" --> "+ruleSet.getRulesList().get(i).getCategory()+" error "+giveGError(ruleSet, i));
 			}catch(IndexOutOfBoundsException ie)
 			{
 			//	System.out.println("Index out of bound");
 				str.append("{}");
-				str.append(" --> "+ruleSet.getRulesList().get(i).getCategory()+" error "+ruleSet.getRulesList().get(i).getgError());
+				str.append(" --> "+ruleSet.getRulesList().get(i).getCategory()+" error "+giveGError(ruleSet, i));
 			}
 		  str.append(System.lineSeparator());
 		}
@@ -79,9 +80,21 @@ public class Outputs {
 		return str.toString();
 	}
 	
+	public String giveGError(RuleSet ruleset,int index)
+	{
+		if(Notations.VALIDATION_ON)
+		{
+		return ruleset.getRulesList().get(index).getgError().toString();
+		}
+		else
+		{
+			return "";
+		}
+	}
 	public String outputRule(Rules rule)
 	{
 		StringBuffer str = new StringBuffer();
+		str.append("r"+rule.getRuleNumber()+":");
 		for(RuleCondition temp:rule.getRules())
 		{
 			str.append(temp.getCondition()+"/\\");

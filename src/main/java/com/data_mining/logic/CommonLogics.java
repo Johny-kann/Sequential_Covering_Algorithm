@@ -3,6 +3,7 @@ package com.data_mining.logic;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,23 +67,44 @@ public class CommonLogics {
 
 		Set<String> keys = map.keySet();
 
-		Map<Integer, String> treeMap = new TreeMap<Integer, String>();
-
+		List<String> index = new ArrayList<String>(keys
+				);
+		List<Integer> objs = getListFromMap(map);
+		
+		for(int i=0;i<objs.size();i++)
+		{
+			for(int j=i;j<objs.size();j++)
+			{
+				if(objs.get(i)>objs.get(j))
+				{
+					Collections.swap(objs, i, j);
+					Collections.swap(index, i, j);
+				}
+			}
+		}
+		
+	Map<String,Integer> mapp = new LinkedHashMap<String, Integer>();
+	
+	for(int i=0;i<objs.size();i++)
+	{
+		mapp.put(index.get(i), objs.get(i));
+	}
+	
+	return mapp;
+	}
+	
+	public List<Integer> getListFromMap(Map<String, Integer> map)
+	{
+		Set<String> keys = map.keySet();
+		
+		List<Integer> str = new ArrayList<Integer>();
+		
 		for(String key:keys)
 		{
-			treeMap.put(map.get(key), key);
+			str.add(map.get(key));
 		}
 		
-		Map<String,Integer> sortmap = new LinkedHashMap<String, Integer>();
-
-		Set<Integer> keys2 = treeMap.keySet();
-		for(Integer key:keys2)
-		{
-
-		  sortmap.put(treeMap.get(key),key);
-		}
-		
-		return sortmap;
+		return str;
 	}
 	
 	/**

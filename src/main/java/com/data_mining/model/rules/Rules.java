@@ -9,6 +9,8 @@ public class Rules implements Cloneable
 	private List<RuleCondition> rules;
 	private String category;
 	private Double gError;
+	private Integer correctClass;
+	private Integer wrongClass;
 	
 	public Rules(int index,String clas)
 	{
@@ -67,6 +69,22 @@ public class Rules implements Cloneable
 
 	public void setgError(Double gError) {
 		this.gError = gError;
+	}
+
+	public Integer getCorrectClass() {
+		return correctClass;
+	}
+
+	public void setCorrectClass(Integer correctClass) {
+		this.correctClass = correctClass;
+	}
+
+	public Integer getWrongClass() {
+		return wrongClass;
+	}
+
+	public void setWrongClass(Integer wrongClass) {
+		this.wrongClass = wrongClass;
 	}
 	
 	
