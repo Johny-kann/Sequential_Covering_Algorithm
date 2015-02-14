@@ -34,8 +34,7 @@ public class MainController {
 	{
 		mainAttributes = new DataTable();
 		mainRuleSet = new RuleSet();
-		
-		
+	
 	}
 	
 	public void loadAttributesAndRecords()
@@ -61,19 +60,10 @@ public class MainController {
 				);
 	//	System.out.println(classes.getOrderedClasses());
 	ChoosingAttributes choose = new ChoosingAttributes(trainData);
-	choose.fillRuleSet(trainData, sortedClassSet);
+	choose.fillRuleSet(trainData, sortedClassSet,testData);
 	
 	}
 	
-	/*public void testData()
-	{
-		AttributeAndRecordLoaders.loadAttributeFromFile(testAttributes, FilesList.ATTRIBUTES_FILES, FilesList.ATTRIBUTES_FILES);
-		
-		AttributeAndRecordLoaders.loadRecordsFromFile(testAttributes, FilesList.TEST_RECORD_FILES);
-		
-	} */
-	
-    
 	
 	public void output()
 	{

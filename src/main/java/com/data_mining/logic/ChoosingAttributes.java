@@ -43,7 +43,7 @@ public class ChoosingAttributes {
 		numOfAttributes= input.numberOfAttributes();
 	}
 	
-	public RuleSet fillRuleSet(DataTable input,OrderedClassSet set)
+	public RuleSet fillRuleSet(DataTable input,OrderedClassSet set,DataTable validation)
 	{
 		RuleSet ruleSet = new RuleSet();
 		
@@ -59,11 +59,9 @@ public class ChoosingAttributes {
 			}
 			else
 			{
-				index = extractRule(input, ruleSet, set.getClassAtIndex(i), index);
-				
+				index = extractRule(input, ruleSet, set.getClassAtIndex(i), index,validation);
 			}
 		}
-
 		return ruleSet;
 	}
 	
@@ -72,7 +70,7 @@ public class ChoosingAttributes {
 		return new Rules(index, category);
 	}
 	
-	public int extractRule(DataTable input,RuleSet ruleset,String category,int index)
+	public int extractRule(DataTable input,RuleSet ruleset,String category,int index,DataTable validation)
 	{
 			
 	//	Rules rules = new Rules(index, category);
@@ -88,7 +86,7 @@ public class ChoosingAttributes {
 		{
 			DataTable reserve;
 			Rules rule = addRule(temp, category, index);
-			System.out.println("After Rule decided");
+		
 
 			
 			reserve = refineCoveredRules(temp, rule);
@@ -99,9 +97,11 @@ public class ChoosingAttributes {
 			new Outputs().outPutTable(reserve);
 			
 			CommonLogics cl = new CommonLogics();
-			System.out.println("\n");
+	
 			cl.removeRecords(temp, reserve);
 	//		new Outputs().outPutTable(temp);
+			
+			pruneTheRule(rule, validation);
 
 			ruleset.addRules(rule);
 			index++;
@@ -110,27 +110,38 @@ public class ChoosingAttributes {
 		return index;
 	}
 	
-	public void pruneTheRule(DataTable input,Rules rule)
+	public void pruneTheRule(Rules rule,DataTable validationTable)
 	{
 			 
 		Rules newRule = null;
+		DataTable temp = null;
 		try {
 			newRule = rule.clone();
+			temp = validationTable.clone();
 		} catch (CloneNotSupportedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		DataTable temp = refineCoveredRules(input, newRule);
+		
+		
 		Double laplace = laplaceForTable(temp, newRule.getCategory());
 		Double gError = 1- laplace;
 		
-		for(RuleCondition cond:newRule.getRules())
+		for(int i=newRule.getRules().size()-1;i>=0;i--)
 		{
-		
-		Double newlaplace = laplaceForTable(temp, newRule.getCategory());
-		Double newgError = 1- laplace;
+			newRule.getRules().remove(i);
+			
+			temp = refineCoveredRules(validationTable, newRule);
+			Double newgError = 1 - laplaceForTable(validationTable, newRule.getCategory());
+			
+			if(newgError<gError)
+			{
+			rule = newRule;
+			gError = newgError;
+			}
 		}
-
+		
+		
 		
 	}
 	
@@ -220,10 +231,7 @@ public Rules addRule(DataTable input,String category,int index)
 		
 }
 
-		System.out.println(
-				new Outputs().outputRule(ruleRecord));
-		
-		return ruleRecord;
+	return ruleRecord;
 	}
 	
 	/**
@@ -284,7 +292,7 @@ public Rules addRule(DataTable input,String category,int index)
 		
 		for(RuleCondition rr:rules)
 		{
-			System.out.println(rr.getCondition()+rr.getError());
+		
 		}
 		CommonLogics cl = new CommonLogics();
 

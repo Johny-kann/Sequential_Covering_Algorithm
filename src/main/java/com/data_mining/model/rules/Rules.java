@@ -19,7 +19,11 @@ public class Rules implements Cloneable
 	@Override
 	public Rules clone() throws CloneNotSupportedException
 	{
-		return (Rules)super.clone();
+		Rules clone = new Rules(ruleNumber, category);
+		List<RuleCondition> rule = new ArrayList<RuleCondition>();
+		rule.addAll(rules);
+		clone.getRules().addAll(rule);
+		return clone;
 	}
 	
 	public Integer getRuleNumber() {

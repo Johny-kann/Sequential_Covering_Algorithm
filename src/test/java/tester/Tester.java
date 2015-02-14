@@ -22,8 +22,7 @@ public class Tester {
 		
 		RuleSet rule = new RuleSet();
 		
-		
-		rule = choosAttrb.fillRuleSet(mc.getMainTable(), mc.getSortedClassSet());
+		rule = choosAttrb.fillRuleSet(mc.getMainTable(), mc.getSortedClassSet(),mc.getTestAttributes());
 		System.out.println("The Rules are ");
 		System.out.println(mc.getSortedClassSet().getClassesAlone());
 		System.out.println(new Outputs().outputRuleSet(rule));
