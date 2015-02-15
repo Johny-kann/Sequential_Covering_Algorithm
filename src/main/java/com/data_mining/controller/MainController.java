@@ -98,7 +98,7 @@ public class MainController {
 		if(Notations.VALIDATION_ON)
 		{
 			System.out.println("Accuracy "+
-					new ChoosingAttributes().AccuracyForTableByRuleSet(mainAttributes, mainRuleSet)
+					new ChoosingAttributes().AccuracyForTableByRuleSet(trainData, mainRuleSet)
 							);
 		}
 		else

@@ -67,8 +67,7 @@ public class ChoosingAttributes {
 			Rules rule = addRule(temp, category, index);
 		
 			reserve = refineCoveredRules(temp, rule);
-			System.out.println(new Outputs().outputRule(rule));
-			System.out.println(new Outputs().outPutTable(reserve));
+	
 			if(reserve.sizeOfRecords()==0)
 			{
 				break;
@@ -127,14 +126,11 @@ public class ChoosingAttributes {
 			Double newgError = 1 - laplaceForTable(temp, newRule.getCategory());
 			
 	
-			System.out.println(newgError+","+gError);
+		
 			if(newgError<gError)
 			{
 		//		System.out.println("Hell");
-				System.out.println(new Outputs().outputRule(rule)
-						);
-				System.out.println(new Outputs().outputRule(newRule)
-						);
+		
 			try {
 				rule = newRule.clone();
 			} catch (CloneNotSupportedException e) {
@@ -199,8 +195,8 @@ public Rules addRule(DataTable input,String category,int index)
 		while(run)
 		{
 	
-			System.out.println("pm"+pastMeasure
-					);
+	//		System.out.println("pm"+pastMeasure
+	//				);
 			new Outputs().outPutTable(temp);
 			
 			RuleCondition rc;
@@ -344,7 +340,9 @@ public Rules addRule(DataTable input,String category,int index)
 							str, 
 							cl.conditionGeneratorDiscrete(input.getAttributeName(index), str), 
 							laplaceForTable(temp, category),
-							Notations.DISCRETE_EQUAL)
+							Notations.DISCRETE_EQUAL,
+							temp.getCountOfAClassValues(category)
+							)
 					);
 		
 		}
@@ -396,7 +394,9 @@ public Rules addRule(DataTable input,String category,int index)
 							str.toString(), 
 							cl.conditionGeneratorCnts(input.getAttributeName(index), str,true), 
 							laplaceForTable(temp, category),
-							Notations.CNTS_LEFT)
+							Notations.CNTS_LEFT,
+							cl.getCountOfClassValue(temp, category)
+							)
 			);
 			
 			
@@ -409,7 +409,9 @@ public Rules addRule(DataTable input,String category,int index)
 							str.toString(), 
 							cl.conditionGeneratorCnts(input.getAttributeName(index), str,false), 
 							laplaceForTable(temp2, category),
-							Notations.CNTS_RIGHT)
+							Notations.CNTS_RIGHT,
+							temp.getCountOfAClassValues(category)
+							)
 			);
 
 			

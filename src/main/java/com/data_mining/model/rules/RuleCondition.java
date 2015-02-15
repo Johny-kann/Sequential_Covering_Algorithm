@@ -7,14 +7,16 @@ public class RuleCondition
 	private String condition;
 	private Double error;
 	private String split;
+	private Integer noOfCorrectClass;
 	
-	public RuleCondition(String nam,String val,String con,Double error,String split)
+	public RuleCondition(String nam,String val,String con,Double error,String split,int correctClass)
 	{
 		name = nam;
 		value = val;
 		condition = con;
 		this.error = error;
 		this.split = split;
+		this.noOfCorrectClass = correctClass;
 	}
 	
 	public String getName() {
@@ -44,6 +46,14 @@ public class RuleCondition
 	public String getSplit()
 	{
 		return this.split;
+	}
+
+	public Integer getNoOfCorrectClass() {
+		return noOfCorrectClass;
+	}
+
+	public void setNoOfCorrectClass(Integer noOfCorrectClass) {
+		this.noOfCorrectClass = noOfCorrectClass;
 	}
 			
 }

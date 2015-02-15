@@ -365,19 +365,34 @@ public class CommonLogics {
 	 */
 	public RuleCondition bestAttributeFromErrorModel(List<RuleCondition> rules) throws IndexOutOfBoundsException
 	{
-		RuleCondition index = rules.get(0);
+		RuleCondition index = null;
+		
+		for(RuleCondition rule:rules)
+		{
+		
+			if(rule.getNoOfCorrectClass()>0)
+			{
+				index = rule;
+				break;
+			}
+		}
 //		Double laplace = rules.get(0).getError();
 		
 	
 		for(RuleCondition rule:rules)
 		{
 		
-			if(index.getError()<rule.getError())
+			if(index.getError()<rule.getError() 
+			//		&&	rule.getNoOfCorrectClass()>0
+					)
 			{
 				index = rule;
 			}
 		}
+		
+		
 
+		
 		return index;
 		
 		}
