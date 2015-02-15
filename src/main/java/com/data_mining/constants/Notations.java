@@ -30,4 +30,6 @@ public class Notations {
 	public static String DEFAULT_CLASS;
 	
 	public static Boolean VALIDATION_ON = false;
+	
+	public static Boolean TEST_ON = false;
 }

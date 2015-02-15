@@ -59,7 +59,7 @@ public class MainController {
 
 		
 	//	System.out.println(classes.getOrderedClasses());
-	ChoosingAttributes choose = new ChoosingAttributes(trainData);
+	ChoosingAttributes choose = new ChoosingAttributes();
 	if(Notations.VALIDATION_ON)
 	{
 		sortedClassSet = new OrderedClassSet(
@@ -94,7 +94,34 @@ public class MainController {
 	public void output()
 	{
 		System.out.println(new Outputs().outputRuleSet(mainRuleSet));
+		
+		if(Notations.VALIDATION_ON)
+		{
+			System.out.println("Accuracy "+
+					new ChoosingAttributes().AccuracyForTableByRuleSet(mainAttributes, mainRuleSet)
+							);
+		}
+		else
+		{
+		System.out.println("Accuracy "+
+		new ChoosingAttributes().AccuracyForTableByRuleSet(mainAttributes, mainRuleSet)
+				);
+		}
+		
+		
 	}
+	
+	
+	public void testDataAccuracy()
+	{
+		System.out.println("Test Data");
+		new Outputs().outPutTable(testData);
+		System.out.println("Accuracy "+
+				new ChoosingAttributes().AccuracyForTableByRuleSet(testData, mainRuleSet)
+				);
+		
+	}
+	
 	
 	public DataTable getMainTable()
 	{

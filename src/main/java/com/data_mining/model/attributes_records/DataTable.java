@@ -219,6 +219,12 @@ public class DataTable implements Cloneable {
 		
 	}
 	
+	public Integer getCountOfOtherClassValues(String value)
+	{
+		CommonLogics cl = new CommonLogics();
+		return cl.getCountOfOtherClassValues(this, value);
+	}
+	
 }
 
 

@@ -21,19 +21,7 @@ import com.data_mining.view.console.Outputs;
  */
 public class ChoosingAttributes {
 
-	private DataTable inputRecords;
-	private Integer numOfAttributes;
-	private String attributeName;
-	private List<String> attributeValues;
-	
-	private String selectedClass;
-	
-	public ChoosingAttributes(DataTable input)
-	{
-		this.inputRecords = input;
-		numOfAttributes= input.numberOfAttributes();
-	}
-	
+		
 	public RuleSet fillRuleSet(DataTable input,OrderedClassSet set,DataTable validation)
 	{
 		RuleSet ruleSet = new RuleSet();
@@ -79,6 +67,8 @@ public class ChoosingAttributes {
 			Rules rule = addRule(temp, category, index);
 		
 			reserve = refineCoveredRules(temp, rule);
+			System.out.println(new Outputs().outputRule(rule));
+			System.out.println(new Outputs().outPutTable(reserve));
 			if(reserve.sizeOfRecords()==0)
 			{
 				break;
@@ -172,6 +162,8 @@ public class ChoosingAttributes {
 		
 			e.printStackTrace();
 		}
+		if(rule.getRules().size()>0)
+		{
 		for(RuleCondition cond:rule.getRules())
 		{
 			if(temp.numberOfAttributes()!=0)
@@ -180,6 +172,7 @@ public class ChoosingAttributes {
 			temp = new SearchingLogics().
 				refiningSetBasedForNextRule(temp, cond);
 			}
+		}
 		}
 		return temp;
 	}
@@ -206,6 +199,10 @@ public Rules addRule(DataTable input,String category,int index)
 		while(run)
 		{
 	
+			System.out.println("pm"+pastMeasure
+					);
+			new Outputs().outPutTable(temp);
+			
 			RuleCondition rc;
 			try
 			{
@@ -456,32 +453,7 @@ public Rules addRule(DataTable input,String category,int index)
 	}
 	
 	
-	public Map<String,Integer> matchValues(int attrbIndex,String attrbvalue)
-	{
-		Map<String,Integer> categories = new LinkedHashMap<String, Integer>();
-		
-		for(int i=0;i<inputRecords.getClassValues().size();i++)
-		{
-		categories.put(inputRecords.getClassValues().get(i), 0);
-		}
-		
-		for(int i=1;i<inputRecords.sizeOfRecords();i++)
-		{
-				if(inputRecords.
-						getRecordAtIndex(i).
-						getElementValueAtIndex(attrbIndex).equals(attrbvalue)
-						)
-				{
-					String categor = inputRecords.getRecordAtIndex(i).getClassAttribute();
-
-					int count = categories.get(categor);
-					categories.replace(categor, count+1);
-
-				}
-		}
-		
-		return categories;
-	}
+	
 	
 	public double laplaceForTable(DataTable table,String classValue)
 	{
@@ -500,25 +472,36 @@ public Rules addRule(DataTable input,String category,int index)
 		SearchingLogics sl = new SearchingLogics();
 		int correct=0;
 		int wrong = 0;
+		DataTable temp = null;
+		
+		try
+		{
+			temp = table.clone();
+		}catch(CloneNotSupportedException ce)
+		{
+			ce.printStackTrace();
+		}
+		CommonLogics cl = new CommonLogics();
 		for(Rules rr:rule.getRulesList())
 		{
 			
-			DataTable temp = refineCoveredRules(table, rr);
+			DataTable reserve = refineCoveredRules(temp, rr);
 			
-			for(String val:temp.getClassValues())
-			{
-				if(val.equals(rr.getCategory()))
-				{
-					correct+=temp.getCountOfAClassValues(val);
-					rr.setCorrectClass(temp.getCountOfAClassValues(val));
-				}
-				else
-				{	
-					wrong+=temp.getCountOfAClassValues(val);
-					rr.addWrongClass(temp.getCountOfAClassValues(val));
-				}
-			}
+					String val = rr.getCategory();
+				
+					correct+=reserve.getCountOfAClassValues(val);
+					rr.setCorrectClass(reserve.getCountOfAClassValues(val));
+					
+					wrong+=reserve.getCountOfOtherClassValues(val);
+				
+					rr.addWrongClass(reserve.getCountOfOtherClassValues(val));
+				
+				System.out.println(correct+"|"+wrong);
+			
+			
+			cl.removeRecords(temp, reserve);
 		}
+		
 		
 		return (double)correct/(wrong+correct);
 	}

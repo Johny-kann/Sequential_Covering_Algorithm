@@ -27,6 +27,8 @@ public class Rules implements Cloneable
 		category = clas;
 		rules = new ArrayList<RuleCondition>();
 		this.gError = gError;
+		wrongClass = 0;
+		correctClass = 0;
 	}
 	
 	@Override
@@ -91,7 +93,8 @@ public class Rules implements Cloneable
 
 	public void addWrongClass(Integer wrongClass) {
 		// TODO Auto-generated method stub
-		this.wrongClass+=wrongClass;
+		this.wrongClass+=
+				wrongClass;
 		
 	}
 	

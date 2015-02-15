@@ -8,15 +8,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-
-
-
-
-
-
-
-
 import java.util.TreeMap;
 
 import com.data_mining.constants.Notations;
@@ -137,6 +128,23 @@ public class CommonLogics {
 		for(int i=0;i<table.sizeOfRecords();i++)
 		{
 			if(table.getRecordAtIndex(i).getClassAttribute().equals(value))
+				sum++;
+		}
+		
+		return sum;
+	}
+	
+	/**
+	 * @param table
+	 * @param class value
+	 * @return count of a particular class value
+	 */
+	public Integer getCountOfOtherClassValues(DataTable table,String value)
+	{
+		Integer sum=0;
+		for(int i=0;i<table.sizeOfRecords();i++)
+		{
+			if(!(table.getRecordAtIndex(i).getClassAttribute().equals(value)))
 				sum++;
 		}
 		
@@ -360,8 +368,10 @@ public class CommonLogics {
 		RuleCondition index = rules.get(0);
 //		Double laplace = rules.get(0).getError();
 		
+	
 		for(RuleCondition rule:rules)
 		{
+		
 			if(index.getError()<rule.getError())
 			{
 				index = rule;
@@ -378,7 +388,7 @@ public class CommonLogics {
 	 */
 	public boolean isleafNode(DataTable input)
 	{
-		ChoosingAttributes cr = new ChoosingAttributes(input);
+		ChoosingAttributes cr = new ChoosingAttributes();
 		Double error = cr.calculateErrorForTable(input);
 //		System.out.println("Error for leaf node " + error);
 		

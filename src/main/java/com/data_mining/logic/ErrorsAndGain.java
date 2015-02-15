@@ -188,6 +188,8 @@ public class ErrorsAndGain {
 	
 	public Double laplace(Integer correctClassNo,Integer noCoveredbyRule,Integer noOfClassValues)
 	{
+	
+	//	System.out.println(correctClassNo+"1"+"/"+noCoveredbyRule+"+"+noOfClassValues);
 		return (double)(correctClassNo+1)/(noCoveredbyRule+noOfClassValues);
 	}
 }
