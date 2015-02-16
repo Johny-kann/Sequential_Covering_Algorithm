@@ -126,8 +126,7 @@ public class ChoosingAttributes {
 			temp = refineCoveredRules(validationTable, newRule);
 			Double newgError = 1 - laplaceForTable(temp, newRule.getCategory());
 			
-	
-		
+			
 			if(newgError<gError)
 			{
 		//		System.out.println("Hell");
@@ -233,7 +232,7 @@ public Rules addRule(DataTable input,String category,int index)
 			}catch(IndexOutOfBoundsException ie)
 			{
 				run = false;
-				System.out.println("Index Out of Bound");
+				Outputs.printToConsole("Index Out of Bound");
 			}
 		
 }

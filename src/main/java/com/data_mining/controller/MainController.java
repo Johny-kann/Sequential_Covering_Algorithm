@@ -68,6 +68,8 @@ public class MainController {
 				cl.sortMapValues
 				(cl.classAndCounts(trainData))
 				);
+		Outputs.printToConsole("Order of the classes "+ sortedClassSet.getClassesAlone()
+				);
 	mainRuleSet = choose.fillRuleSet(trainData, sortedClassSet,validationData);
 	orderBasedOnGeneralError();
 	}else
