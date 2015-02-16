@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.data_mining.constants.Notations;
+import com.data_mining.logs.TrainingLog;
 import com.data_mining.model.attributes_records.DataTable;
 import com.data_mining.model.attributes_records.OrderedClassSet;
 import com.data_mining.model.rules.RuleCondition;
@@ -38,6 +39,7 @@ public class ChoosingAttributes {
 			}
 			else
 			{
+				TrainingLog.trainLogs.info("Extracting Rule for "+set.getClassAtIndex(i));
 				index = extractRule(input, ruleSet, set.getClassAtIndex(i), index,validation);
 			}
 		}
@@ -71,7 +73,9 @@ public class ChoosingAttributes {
 	
 			if(reserve.sizeOfRecords()==0)
 			{
+				TrainingLog.trainLogs.info("Reserve size is zero breaking loop");
 				break;
+				
 			}
 				
 			CommonLogics cl = new CommonLogics();
@@ -84,11 +88,13 @@ public class ChoosingAttributes {
 
 			if(rule.getgError()<0.5)
 			{
+				
 			ruleset.addRules(rule);
 			index++;
 			}
 			else
 			{
+				TrainingLog.trainLogs.info("Eliminating Rule for generalization error greater than 0.5");
 				break;
 			}
 		}
@@ -124,6 +130,7 @@ public class ChoosingAttributes {
 			newRule.getRules().remove(i);
 			
 			temp = refineCoveredRules(validationTable, newRule);
+			
 			Double newgError = 1 - laplaceForTable(temp, newRule.getCategory());
 			
 			
@@ -131,8 +138,10 @@ public class ChoosingAttributes {
 			{
 		//		System.out.println("Hell");
 		
+				TrainingLog.trainLogs.info("Pruning the rule "+rule);
 			try {
 				rule = newRule.clone();
+				TrainingLog.trainLogs.info("New Rule "+rule);
 			} catch (CloneNotSupportedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -194,10 +203,6 @@ public Rules addRule(DataTable input,String category,int index)
 		
 		while(run)
 		{
-	
-	//		System.out.println("pm"+pastMeasure
-	//				);
-		
 			
 			RuleCondition rc;
 			try
@@ -208,6 +213,7 @@ public Rules addRule(DataTable input,String category,int index)
 			if(newMeasure>pastMeasure)
 			{
 	
+				TrainingLog.trainLogs.info("Adding the rule condition "+rc.getCondition());
 			ruleRecord.addRule(rc);
 
 			
@@ -217,6 +223,7 @@ public Rules addRule(DataTable input,String category,int index)
 			{
 			run = false;
 	
+			TrainingLog.trainLogs.info("Training record size zero");
 			}
 			else
 			{

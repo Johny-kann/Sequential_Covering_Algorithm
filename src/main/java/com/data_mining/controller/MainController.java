@@ -11,6 +11,7 @@ import com.data_mining.logic.AttributeAndRecordLoaders;
 import com.data_mining.logic.ChoosingAttributes;
 import com.data_mining.logic.CommonLogics;
 import com.data_mining.logic.SearchingLogics;
+import com.data_mining.logs.TrainingLog;
 import com.data_mining.model.attributes_records.DataTable;
 import com.data_mining.model.attributes_records.OrderedClassSet;
 import com.data_mining.model.nodes.RootTreeNode;
@@ -68,8 +69,11 @@ public class MainController {
 				cl.sortMapValues
 				(cl.classAndCounts(trainData))
 				);
+		TrainingLog.trainLogs.info("Sorted the input classes");
+		
 		Outputs.printToConsole("Order of the classes "+ sortedClassSet.getClassesAlone()
 				);
+		
 	mainRuleSet = choose.fillRuleSet(trainData, sortedClassSet,validationData);
 	orderBasedOnGeneralError();
 	}else
