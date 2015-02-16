@@ -78,7 +78,7 @@ public class MainController {
 				(map)
 				);
 		
-		System.out.println("Order of the classes "+ sortedClassSet.getClassesAlone()
+		Outputs.printToConsole("Order of the classes "+ sortedClassSet.getClassesAlone()
 				);
 		mainRuleSet = choose.fillRuleSet(mainAttributes, sortedClassSet,testData);
 	}
@@ -93,17 +93,22 @@ public class MainController {
 	
 	public void output()
 	{
-		System.out.println(new Outputs().outputRuleSet(mainRuleSet));
+		
+		Outputs.printToConsole(new Outputs().outputRuleSet(mainRuleSet));
+		Outputs.printToConsole("Train Data");
 		
 		if(Notations.PRUNING_ON)
 		{
-			System.out.println("Accuracy "+
+			
+			Outputs.printToConsole(new Outputs().outPutTable(trainData));
+			Outputs.printToConsole("Accuracy "+
 					new ChoosingAttributes().AccuracyForTableByRuleSet(trainData, mainRuleSet)
 							);
 		}
 		else
 		{
-		System.out.println("Accuracy "+
+			Outputs.printToConsole(new Outputs().outPutTable(mainAttributes));
+		Outputs.printToConsole("Accuracy "+
 		new ChoosingAttributes().AccuracyForTableByRuleSet(mainAttributes, mainRuleSet)
 				);
 		}
@@ -114,9 +119,11 @@ public class MainController {
 	
 	public void testDataAccuracy()
 	{
-		System.out.println("Test Data");
-		new Outputs().outPutTable(testData);
-		System.out.println("Accuracy "+
+		Outputs.printToConsole("Test Data");
+		Outputs.printToConsole(
+		new Outputs().outPutTable(testData)
+		);
+		Outputs.printToConsole("Accuracy "+
 				new ChoosingAttributes().AccuracyForTableByRuleSet(testData, mainRuleSet)
 				);
 		

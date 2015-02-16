@@ -83,7 +83,7 @@ public class SearchingLogics {
 		}
 		else
 		{
-			System.out.println("Splitting condition dint match");
+			Outputs.printToConsole("Splitting condition dint match");
 			return null;
 		}
 		
@@ -115,7 +115,7 @@ public class SearchingLogics {
 		}
 		else
 		{
-			System.out.println("Splitting condition dint match");
+			Outputs.printToConsole("Splitting condition dint match");
 			return null;
 		}
 	}

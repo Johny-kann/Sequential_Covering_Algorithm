@@ -1,5 +1,7 @@
 package com.data_mining.view.console;
 
+import sun.misc.GC.LatencyRequest;
+
 import com.data_mining.constants.Notations;
 import com.data_mining.model.attributes_records.DataTable;
 import com.data_mining.model.rules.RuleCondition;
@@ -23,14 +25,14 @@ public class Outputs {
 		{
 			if(i<col)
 			{
-			System.out.print(
+		str += (
 					table.getAttributes().get(i).getName()+"\t\t"
 					);
-			str+="\t\t";
+	//		str+="\t\t";
 			}
 			else
 			{
-				System.out.println(table.getClassName());
+				str += (table.getClassName());
 				str+=table.getClassName();
 				str+=System.lineSeparator();
 			}
@@ -42,14 +44,11 @@ public class Outputs {
 			{
 				if(j<col)
 				{
-				System.out.print(
-						table.getRecordAtIndex(i).getElementValueAtIndex(j)+"\t\t"
-						);
 				str+=table.getRecordAtIndex(i).getElementValueAtIndex(j)+"\t\t";
 				}
 				else
 				{
-					System.out.println(table.getRecordAtIndex(i).getClassAttribute());
+
 					str+=table.getRecordAtIndex(i).getClassAttribute();
 					str+=System.lineSeparator();
 					
@@ -66,8 +65,23 @@ public class Outputs {
 		{
 			try
 			{
-				str.append(outputRule(ruleSet.getRulesList().get(i)));
-				str.append(" --> "+ruleSet.getRulesList().get(i).getCategory()+" error "+giveGError(ruleSet, i));
+				if(i==ruleSet.getRulesList().size()-1)
+				{
+					str.append(outputRule(ruleSet.getRulesList().get(i),true)+"{}");
+					str.append(" --> "+ruleSet.getRulesList().get(i).getCategory());
+			
+					if(Notations.PRUNING_ON)
+					{
+						str.append(" error "+giveGError(ruleSet, i));
+					}
+				}
+				str.append(outputRule(ruleSet.getRulesList().get(i),false));
+				str.append(" --> "+ruleSet.getRulesList().get(i).getCategory());
+				
+				if(Notations.PRUNING_ON)
+				{
+					str.append(" error "+giveGError(ruleSet, i));
+				}
 			}catch(IndexOutOfBoundsException ie)
 			{
 			//	System.out.println("Index out of bound");
@@ -91,7 +105,7 @@ public class Outputs {
 			return "";
 		}
 	}
-	public String outputRule(Rules rule)
+	public String outputRule(Rules rule,boolean lastRule)
 	{
 		StringBuffer str = new StringBuffer();
 		str.append("r"+rule.getRuleNumber()+":");
@@ -99,6 +113,18 @@ public class Outputs {
 		{
 			str.append(temp.getCondition()+"/\\");
 		}
+		if(!lastRule)
+		{
 		return str.substring(0, str.length()-2).toString();
+		}
+		else
+		{
+		return str.toString();
+		}
+	}
+	
+	public static void printToConsole(String str)
+	{
+		System.out.println(str);
 	}
 }

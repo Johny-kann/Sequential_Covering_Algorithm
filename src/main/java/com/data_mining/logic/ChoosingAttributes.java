@@ -46,6 +46,7 @@ public class ChoosingAttributes {
 	
 	public Rules defaultRule(String category,int index,DataTable val)
 	{
+	
 		return new Rules(index, category,laplaceForTable(val, category));
 	}
 	
@@ -498,8 +499,8 @@ public Rules addRule(DataTable input,String category,int index)
 				
 					rr.addWrongClass(reserve.getCountOfOtherClassValues(val));
 				
-				System.out.println(correct+"|"+wrong);
-			
+//				System.out.println(correct+"|"+wrong);
+					Outputs.printToConsole("Rule :"+rr.getRuleNumber()+" correct "+rr.getCorrectClass()+" wrong "+rr.getWrongClass());
 			
 			cl.removeRecords(temp, reserve);
 		}
