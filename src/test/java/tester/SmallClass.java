@@ -1,5 +1,7 @@
 package tester;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,6 +13,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import com.data_mining.constants.Notations;
 import com.data_mining.controller.MainController;
@@ -22,13 +28,32 @@ public class SmallClass {
 		
 	public static void main(String[] args) 
 	{
-		Double t1 =0.2;
-		Double t2 =0.3;
+		Logger log = Logger.getLogger("TestLogger");
 
-		if(t1<t2)
-		{
-			System.out.println("Hell");
-		}
-	 
+		FileHandler fh;  
+
+		    try {  
+
+		        // This block configure the logger with handler and formatter  
+		     //   fh = new FileHandler("/Hello.log");  
+//		        URL url= FileHandler.class.getResource("/Hello.log");
+		        fh = new FileHandler("Hello.log");
+		        log.addHandler(fh);
+		        log.setUseParentHandlers(false);
+		        
+		        SimpleFormatter formatter = new SimpleFormatter();  
+		        fh.setFormatter(formatter);  
+
+		        // the following statement is used to log any messages  
+		        log.info("My first log");  
+
+		    } catch (SecurityException e) {  
+		        e.printStackTrace();  
+		    } catch (IOException e) {  
+		        e.printStackTrace();  
+		    }  
+
+		log.log(Level.INFO,"List");
+	//	System.out.println(log);
 	}
 }

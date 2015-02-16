@@ -1,8 +1,11 @@
 package com.data_mining.view.console;
 
+import java.util.logging.Level;
+
 import sun.misc.GC.LatencyRequest;
 
 import com.data_mining.constants.Notations;
+import com.data_mining.logs.TrainingLog;
 import com.data_mining.model.attributes_records.DataTable;
 import com.data_mining.model.rules.RuleCondition;
 import com.data_mining.model.rules.RuleSet;
@@ -135,5 +138,6 @@ public class Outputs {
 	public static void printToConsole(String str)
 	{
 		System.out.println(str);
+//		TrainingLog.trainLogs.log(Level.INFO,str);
 	}
 }

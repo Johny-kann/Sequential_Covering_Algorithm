@@ -32,4 +32,10 @@ public class Notations {
 	public static Boolean PRUNING_ON = false;
 	
 	public static Boolean TEST_ON = false;
+	
+	public static final String LOG_FOR_ACCURACY = "ACC_LOG";
+	
+	public static final String LOG_FOR_TRAINING = "TRAIN_LOG";
+	
+	public static final String LOG_FOR_TESTING = "TEST_LOG";
 }
