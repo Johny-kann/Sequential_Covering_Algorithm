@@ -3,6 +3,11 @@ package com.data_mining.model.rules;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.omg.CORBA.COMM_FAILURE;
+
+import com.data_mining.logic.CommonLogics;
+import com.data_mining.logic.ErrorsAndGain;
+
 public class Rules implements Cloneable
 {
 	private Integer ruleNumber;
@@ -26,7 +31,7 @@ public class Rules implements Cloneable
 		ruleNumber = index;
 		category = clas;
 		rules = new ArrayList<RuleCondition>();
-		this.gError = gError;
+		this.gError = new ErrorsAndGain().roundOff(gError, 4);
 		wrongClass = 0;
 		correctClass = 0;
 	}
@@ -72,7 +77,7 @@ public class Rules implements Cloneable
 	}
 
 	public void setgError(Double gError) {
-		this.gError = gError;
+		this.gError = new ErrorsAndGain().roundOff(gError, 4);
 	}
 
 	public Integer getCorrectClass() {

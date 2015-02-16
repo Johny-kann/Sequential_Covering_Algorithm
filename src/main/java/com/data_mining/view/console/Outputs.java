@@ -67,20 +67,20 @@ public class Outputs {
 			{
 				if(i==ruleSet.getRulesList().size()-1)
 				{
-					str.append(outputRule(ruleSet.getRulesList().get(i),true)+"{}");
+					str.append(outputRule(ruleSet.getRulesList().get(i))+"{}");
 					str.append(" --> "+ruleSet.getRulesList().get(i).getCategory());
 			
 					if(Notations.PRUNING_ON)
 					{
-						str.append(" error "+giveGError(ruleSet, i));
+						str.append(" G Error "+giveGError(ruleSet, i));
 					}
 				}
-				str.append(outputRule(ruleSet.getRulesList().get(i),false));
+				str.append(outputRule(ruleSet.getRulesList().get(i)));
 				str.append(" --> "+ruleSet.getRulesList().get(i).getCategory());
 				
 				if(Notations.PRUNING_ON)
 				{
-					str.append(" error "+giveGError(ruleSet, i));
+					str.append(" G error "+giveGError(ruleSet, i));
 				}
 			}catch(IndexOutOfBoundsException ie)
 			{
@@ -105,8 +105,17 @@ public class Outputs {
 			return "";
 		}
 	}
-	public String outputRule(Rules rule,boolean lastRule)
+	public String outputRule(Rules rule)
 	{
+		Boolean lastRule;
+		if(rule.getRules().size()==0)
+		{
+			lastRule = true;
+		}
+		else
+		{
+			lastRule = false;
+		}
 		StringBuffer str = new StringBuffer();
 		str.append("r"+rule.getRuleNumber()+":");
 		for(RuleCondition temp:rule.getRules())

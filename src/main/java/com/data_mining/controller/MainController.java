@@ -29,6 +29,7 @@ public class MainController {
 
 	DataTable mainAttributes;
 	DataTable trainData;
+	DataTable validationData;
 	DataTable testData;
 	RuleSet mainRuleSet;
 	OrderedClassSet sortedClassSet;
@@ -37,19 +38,20 @@ public class MainController {
 	{
 		mainAttributes = new DataTable();
 		mainRuleSet = new RuleSet();
+		testData = new DataTable();
 	
 	}
 	
 	public void loadAttributesAndRecords()
 	{
 		
-		AttributeAndRecordLoaders.loadAttributeFromFile(mainAttributes, FilesList.ATTRIBUTES_FILES, FilesList.ATTRIBUTES_FILES);
+		AttributeAndRecordLoaders.loadAttributeFromFile(mainAttributes, FilesList.ATTRIBUTES_FILES, FilesList.RECORD_FILES);
 		
-		AttributeAndRecordLoaders.loadRecordsFromFile(mainAttributes, FilesList.RECORD_FILES);
+//		AttributeAndRecordLoaders.loadRecordsFromFile(mainAttributes, FilesList.RECORD_FILES);
 		
 		SearchingLogics sl = new SearchingLogics();
 		trainData = sl.getTrainingSet(mainAttributes);
-		testData = sl.getValidationSet(mainAttributes);
+		validationData = sl.getValidationSet(mainAttributes);
 	}
 	
 
@@ -66,7 +68,8 @@ public class MainController {
 				cl.sortMapValues
 				(cl.classAndCounts(trainData))
 				);
-	mainRuleSet = choose.fillRuleSet(trainData, sortedClassSet,testData);
+	mainRuleSet = choose.fillRuleSet(trainData, sortedClassSet,validationData);
+	orderBasedOnGeneralError();
 	}else
 	{
 	//	System.out.println(mainAttributes.sizeOfRecords()+","+trainData.sizeOfRecords()+","+testData.sizeOfRecords());
@@ -80,7 +83,7 @@ public class MainController {
 		
 		Outputs.printToConsole("Order of the classes "+ sortedClassSet.getClassesAlone()
 				);
-		mainRuleSet = choose.fillRuleSet(mainAttributes, sortedClassSet,testData);
+		mainRuleSet = choose.fillRuleSet(mainAttributes, sortedClassSet,validationData);
 	}
 	
 	}
@@ -108,6 +111,7 @@ public class MainController {
 		else
 		{
 			Outputs.printToConsole(new Outputs().outPutTable(mainAttributes));
+	//		Outputs.printToConsole(new Outputs().outPutTable());
 		Outputs.printToConsole("Accuracy "+
 		new ChoosingAttributes().AccuracyForTableByRuleSet(mainAttributes, mainRuleSet)
 				);
@@ -119,6 +123,10 @@ public class MainController {
 	
 	public void testDataAccuracy()
 	{
+		AttributeAndRecordLoaders.loadAttributeFromFile(testData, FilesList.ATTRIBUTES_FILES, FilesList.TEST_RECORD_FILES);
+		
+	//	AttributeAndRecordLoaders.loadRecordsFromFile(testData, FilesList.TEST_RECORD_FILES);
+		
 		Outputs.printToConsole("Test Data");
 		Outputs.printToConsole(
 		new Outputs().outPutTable(testData)
@@ -141,7 +149,7 @@ public class MainController {
 	}
 	
 	public DataTable getTestAttributes() {
-		return testData;
+		return validationData;
 	}
 
 	public OrderedClassSet getSortedClassSet() {

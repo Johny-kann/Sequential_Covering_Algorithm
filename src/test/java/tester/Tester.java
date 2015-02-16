@@ -13,7 +13,7 @@ public class Tester {
 
 	public static void main(String args[])
 	{
-		Notations.PRUNING_ON = false;
+		Notations.PRUNING_ON = true;
 		MainController mc = new MainController();
 		mc.loadAttributesAndRecords();
 		mc.fillRuleSet();

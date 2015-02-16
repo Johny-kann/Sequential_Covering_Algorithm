@@ -500,7 +500,9 @@ public Rules addRule(DataTable input,String category,int index)
 					rr.addWrongClass(reserve.getCountOfOtherClassValues(val));
 				
 //				System.out.println(correct+"|"+wrong);
-					Outputs.printToConsole("Rule :"+rr.getRuleNumber()+" correct "+rr.getCorrectClass()+" wrong "+rr.getWrongClass());
+					Outputs.printToConsole(
+							new Outputs().outputRule(rr)+
+							rr.getRuleNumber()+" correct "+rr.getCorrectClass()+" wrong "+rr.getWrongClass());
 			
 			cl.removeRecords(temp, reserve);
 		}
