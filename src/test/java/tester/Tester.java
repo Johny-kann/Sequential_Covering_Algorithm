@@ -13,7 +13,7 @@ public class Tester {
 
 	public static void main(String args[])
 	{
-		Notations.VALIDATION_ON = true;
+		Notations.PRUNING_ON = false;
 		MainController mc = new MainController();
 		mc.loadAttributesAndRecords();
 		mc.fillRuleSet();

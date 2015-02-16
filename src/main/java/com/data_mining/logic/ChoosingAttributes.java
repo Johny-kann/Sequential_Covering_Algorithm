@@ -77,7 +77,7 @@ public class ChoosingAttributes {
 	
 			cl.removeRecords(temp, reserve);
 	
-		if(Notations.VALIDATION_ON)
+		if(Notations.PRUNING_ON)
 		{
 			rule = pruneTheRule(rule, validation);
 
@@ -197,7 +197,7 @@ public Rules addRule(DataTable input,String category,int index)
 	
 	//		System.out.println("pm"+pastMeasure
 	//				);
-			new Outputs().outPutTable(temp);
+		
 			
 			RuleCondition rc;
 			try

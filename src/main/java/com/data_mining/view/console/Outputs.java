@@ -82,7 +82,7 @@ public class Outputs {
 	
 	public String giveGError(RuleSet ruleset,int index)
 	{
-		if(Notations.VALIDATION_ON)
+		if(Notations.PRUNING_ON)
 		{
 		return ruleset.getRulesList().get(index).getgError().toString();
 		}

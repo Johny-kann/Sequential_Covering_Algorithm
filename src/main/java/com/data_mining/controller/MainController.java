@@ -60,7 +60,7 @@ public class MainController {
 		
 	//	System.out.println(classes.getOrderedClasses());
 	ChoosingAttributes choose = new ChoosingAttributes();
-	if(Notations.VALIDATION_ON)
+	if(Notations.PRUNING_ON)
 	{
 		sortedClassSet = new OrderedClassSet(
 				cl.sortMapValues
@@ -78,7 +78,7 @@ public class MainController {
 				(map)
 				);
 		
-		System.out.println(sortedClassSet.getClassesAlone()
+		System.out.println("Order of the classes "+ sortedClassSet.getClassesAlone()
 				);
 		mainRuleSet = choose.fillRuleSet(mainAttributes, sortedClassSet,testData);
 	}
@@ -95,7 +95,7 @@ public class MainController {
 	{
 		System.out.println(new Outputs().outputRuleSet(mainRuleSet));
 		
-		if(Notations.VALIDATION_ON)
+		if(Notations.PRUNING_ON)
 		{
 			System.out.println("Accuracy "+
 					new ChoosingAttributes().AccuracyForTableByRuleSet(trainData, mainRuleSet)
