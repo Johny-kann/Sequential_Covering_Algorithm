@@ -2,10 +2,9 @@ package com.data_mining.controller;
 
 import java.util.Map;
 
-import org.hibernate.type.OrderedSetType;
-
 import com.data_mining.constants.FilesList;
 import com.data_mining.constants.Notations;
+import com.data_mining.file_readers.PropertiesConfig;
 import com.data_mining.file_readers.TextFileWriter;
 import com.data_mining.logic.AttributeAndRecordLoaders;
 import com.data_mining.logic.ChoosingAttributes;
@@ -14,7 +13,6 @@ import com.data_mining.logic.SearchingLogics;
 import com.data_mining.logs.TrainingLog;
 import com.data_mining.model.attributes_records.DataTable;
 import com.data_mining.model.attributes_records.OrderedClassSet;
-
 import com.data_mining.model.rules.RuleSet;
 import com.data_mining.view.console.Outputs;
 
@@ -39,6 +37,7 @@ public class MainController {
 		mainAttributes = new DataTable();
 		mainRuleSet = new RuleSet();
 		testData = new DataTable();
+		PropertiesConfig.assignInputFiles();
 	
 	}
 	
@@ -140,6 +139,7 @@ public class MainController {
 	public void testDataAccuracy()
 	{
 		AttributeAndRecordLoaders.loadAttributeFromFile(testData, FilesList.ATTRIBUTES_FILES, FilesList.TEST_RECORD_FILES);
+		TrainingLog.testLogs.info("Accuracy Loaded from file");
 		StringBuffer stBuffer = new StringBuffer();
 		
 			

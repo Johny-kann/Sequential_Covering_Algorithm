@@ -39,5 +39,7 @@ public class Notations {
 	
 	public static final String LOG_FOR_TESTING = "TEST_LOG";
 	
+	public static final String LOG_DOCUMENT = "MAIN_LOG";
+	
 	public static boolean STRICTLY_LAPLACE = false;
 }
