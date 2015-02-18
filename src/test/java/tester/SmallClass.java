@@ -1,6 +1,11 @@
 package tester;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import com.data_mining.constants.FilesList;
 import com.data_mining.constants.Notations;
 import com.data_mining.controller.MainController;
 import com.data_mining.logic.CommonLogics;
@@ -25,35 +31,41 @@ import com.data_mining.model.attributes_records.DataTable;
 import com.data_mining.view.console.Outputs;
 
 public class SmallClass {
+	
 		
 	public static void main(String[] args) 
 	{
-		Logger log = Logger.getLogger("TestLogger");
-
-		FileHandler fh;  
-
-		    try {  
-
-		        // This block configure the logger with handler and formatter  
-		     //   fh = new FileHandler("/Hello.log");  
-//		        URL url= FileHandler.class.getResource("/Hello.log");
-		        fh = new FileHandler("Hello.log");
-		        log.addHandler(fh);
-		        log.setUseParentHandlers(false);
-		        
-		        SimpleFormatter formatter = new SimpleFormatter();  
-		        fh.setFormatter(formatter);  
-
-		        // the following statement is used to log any messages  
-		        log.info("My first log");  
-
-		    } catch (SecurityException e) {  
-		        e.printStackTrace();  
-		    } catch (IOException e) {  
-		        e.printStackTrace();  
-		    }  
-
-		log.log(Level.INFO,"List");
-	//	System.out.println(log);
+		String location = FilesList.LOG_ACCURACY;
+	
+	//	InputStream file = FileReader.class.getClass().getResourceAsStream(location);
+		FileReader file = null;
+		try {
+			file = new FileReader(location);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		BufferedReader br = null;
+	
+			br = new BufferedReader(
+							file);
+							
+		
+		String sCurrentLine = "";
+		
+		try {
+			
+			while ((sCurrentLine = br.readLine()) != null) {
+				
+			//	lines.add(sCurrentLine);
+				System.out.println(sCurrentLine
+						);
+				
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }

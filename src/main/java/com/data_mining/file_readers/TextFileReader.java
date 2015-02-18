@@ -1,14 +1,17 @@
 package com.data_mining.file_readers;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 import com.data_mining.constants.FilesList;
+import com.data_mining.logs.TrainingLog;
 
 /**
  * Reads a text file and gives output based on the desired format
@@ -35,10 +38,18 @@ public class TextFileReader {
 	 */
 	private void resetReader()
 	{
-		InputStream file = FileReader.class.getClass().getResourceAsStream(location);
+	//	InputStream file = FileReader.class.getClass().getResourceAsStream(location);
+		FileReader file = null;
+		try {
+			file = new FileReader(location);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			TrainingLog.trainLogs.log(Level.SEVERE, "Cant read the input file under location "+location);
+			e.printStackTrace();
+		}
 		br = new BufferedReader(
 				//		new FileReader("tester.txt")
-						new InputStreamReader(file)
+						file
 						);
 	}
 	

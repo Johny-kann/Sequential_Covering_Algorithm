@@ -28,8 +28,11 @@ public class TextFileWriter {
 		
 				
 		try {
-		    writer = new BufferedWriter(new OutputStreamWriter(
-		          new FileOutputStream(location), "utf-8"));
+		    writer = new BufferedWriter(
+		    	//	new OutputStreamWriter(
+		    //      new FileOutputStream(location), "utf-8")
+		    		new FileWriter(location)
+		    );
 		    writer.write(content);
 		
 		} catch (IOException ex) {
