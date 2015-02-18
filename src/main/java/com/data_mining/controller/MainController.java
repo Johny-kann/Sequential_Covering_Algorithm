@@ -102,33 +102,59 @@ public class MainController {
 	
 	public void output()
 	{
+		trainDataAccuracy();
 		
-		Outputs.printToConsole(new Outputs().outputRuleSet(mainRuleSet));
-		Outputs.printToConsole("Train Data");
-		
-				Outputs.printToConsole(new Outputs().outPutTable(mainAttributes));
+		if(Notations.TEST_ON)
+		{
+			testDataAccuracy();
+		}
+		mainRuleSetPrint();
+	}
 	
-		Outputs.printToConsole("Accuracy "+
-		new ChoosingAttributes().AccuracyForTableByRuleSet(mainAttributes, mainRuleSet)
+	public void trainDataAccuracy()
+	{
+		StringBuffer stBuffer = new StringBuffer();
+
+		stBuffer.append(new Outputs().outputRuleSet(mainRuleSet));
+		stBuffer.append("Train Data");
+		stBuffer.append(System.lineSeparator());
+		
+				stBuffer.append(new Outputs().outPutTable(mainAttributes));
+	
+		stBuffer.append("Accuracy "+
+		new ChoosingAttributes().AccuracyForTableByRuleSet(mainAttributes, mainRuleSet,stBuffer)
 				);
+
+		Outputs.printToConsole(stBuffer.toString());
+		new TextFileWriter().writeFile(stBuffer.toString(), FilesList.WRITE_TRAIN_RESULT);
 			
 	}
 	
+	public void mainRuleSetPrint()
+	{
+		StringBuffer stBuffer = new StringBuffer();
+		new TextFileWriter().writeFile(
+				new Outputs().outputRuleSet(mainRuleSet), 
+				FilesList.WRITE_RULE_SET) ;
+	}
 	
 	public void testDataAccuracy()
 	{
 		AttributeAndRecordLoaders.loadAttributeFromFile(testData, FilesList.ATTRIBUTES_FILES, FilesList.TEST_RECORD_FILES);
+		StringBuffer stBuffer = new StringBuffer();
 		
-	//	AttributeAndRecordLoaders.loadRecordsFromFile(testData, FilesList.TEST_RECORD_FILES);
-		
-		Outputs.printToConsole("Test Data");
+			
 		Outputs.printToConsole(
 		new Outputs().outPutTable(testData)
 		);
-		Outputs.printToConsole("Accuracy "+
-				new ChoosingAttributes().AccuracyForTableByRuleSet(testData, mainRuleSet)
+	
+		stBuffer.append(new Outputs().outPutTable(testData)
 				);
+		stBuffer.append("Accuracy "+
+				new ChoosingAttributes().AccuracyForTableByRuleSet(testData, mainRuleSet,stBuffer));
 		
+		Outputs.printToConsole(stBuffer.toString());
+		new TextFileWriter().writeFile(stBuffer.toString(), FilesList.WRITE_TEST_RESULT);
 	}
 	
 	

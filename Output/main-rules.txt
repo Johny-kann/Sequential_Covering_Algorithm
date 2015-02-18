@@ -1,0 +1,5 @@
+r0:bloodPressure>=146.0 --> yes G error 0.4545
+r1:oldpeakST>=2.1 --> yes G error 0.4545
+r2:bloodSugar>120=1 --> yes G error 0.4545
+r3:chestPain=2/\age<65.5 --> yes G error 0.4545
+r4:{} --> no G error 0.4545

@@ -49,6 +49,31 @@ public class CommonLogics {
 		return newList;
 	}
 	
+	public static void assignInitValues(String args[])
+	{
+		if(args[0].equalsIgnoreCase("Prune-ON"))
+		{
+			System.out.println(args[0]);
+			Notations.PRUNING_ON = true;
+		}
+		else
+		{
+			Notations.PRUNING_ON = false;
+		}
+		
+		if(args[1].equalsIgnoreCase("Test-ON"))
+		{
+			Notations.TEST_ON = true;
+		}
+		else
+		{
+			Notations.TEST_ON = false;
+		}
+		
+		new TrainingLog();
+		
+	}
+	
 	public String conditionGeneratorDiscrete(String name,String condition)
 	{
 		return name+Notations.DISCRETE_EQUALITY+condition;

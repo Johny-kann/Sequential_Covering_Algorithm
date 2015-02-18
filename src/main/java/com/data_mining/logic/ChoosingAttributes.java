@@ -480,7 +480,7 @@ public Rules addRule(DataTable input,String category,int index)
 		
 	}
 	
-	public double AccuracyForTableByRuleSet(DataTable table,RuleSet rule)
+	public double AccuracyForTableByRuleSet(DataTable table,RuleSet rule,StringBuffer stBuffer)
 	{
 		SearchingLogics sl = new SearchingLogics();
 		int correct=0;
@@ -510,9 +510,10 @@ public Rules addRule(DataTable input,String category,int index)
 					rr.addWrongClass(reserve.getCountOfOtherClassValues(val));
 				
 //				System.out.println(correct+"|"+wrong);
-					Outputs.printToConsole(
+					stBuffer.append(
 							new Outputs().outputRule(rr)+
 							" correct "+rr.getCorrectClass()+" wrong "+rr.getWrongClass());
+					stBuffer.append(System.lineSeparator());
 			
 			cl.removeRecords(temp, reserve);
 		}
