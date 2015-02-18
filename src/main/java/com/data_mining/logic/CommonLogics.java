@@ -14,7 +14,7 @@ import com.data_mining.constants.Notations;
 import com.data_mining.logs.TrainingLog;
 import com.data_mining.model.attributes_records.DataTable;
 import com.data_mining.model.attributes_records.Records;
-import com.data_mining.model.errors.ErrorModelList;
+
 import com.data_mining.model.errors.PassingAttribute;
 import com.data_mining.model.rules.RuleCondition;
 import com.data_mining.model.rules.RuleSet;

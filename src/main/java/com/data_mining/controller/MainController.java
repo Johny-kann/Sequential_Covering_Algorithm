@@ -14,11 +14,10 @@ import com.data_mining.logic.SearchingLogics;
 import com.data_mining.logs.TrainingLog;
 import com.data_mining.model.attributes_records.DataTable;
 import com.data_mining.model.attributes_records.OrderedClassSet;
-import com.data_mining.model.nodes.RootTreeNode;
-import com.data_mining.model.nodes.TreeNodes;
+
 import com.data_mining.model.rules.RuleSet;
 import com.data_mining.view.console.Outputs;
-import com.data_mining.view.console.decision_tree.TreeBuilder;
+
 
 /**
  * @author Janakiraman 
