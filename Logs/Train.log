@@ -1,20 +1,28 @@
-Feb 16, 2015 4:13:33 PM com.data_mining.controller.MainController fillRuleSet
+Feb 18, 2015 12:59:48 AM com.data_mining.controller.MainController fillRuleSet
 INFO: Sorted the input classes
-Feb 16, 2015 4:13:33 PM com.data_mining.logic.ChoosingAttributes fillRuleSet
+Feb 18, 2015 12:59:50 AM com.data_mining.logic.ChoosingAttributes fillRuleSet
 INFO: Extracting Rule for yes
-Feb 16, 2015 4:13:33 PM com.data_mining.logic.ChoosingAttributes addRule
+Feb 18, 2015 12:59:50 AM com.data_mining.logic.ChoosingAttributes addRule
 INFO: Adding the rule condition bloodPressure>=146.0
-Feb 16, 2015 4:13:34 PM com.data_mining.logic.ChoosingAttributes addRule
+Feb 18, 2015 12:59:50 AM com.data_mining.logic.ChoosingAttributes extractRule
+INFO: Adding rule inside pruning r0:bloodPressure>=146.0
+Feb 18, 2015 12:59:50 AM com.data_mining.logic.ChoosingAttributes addRule
 INFO: Adding the rule condition oldpeakST>=2.1
-Feb 16, 2015 4:13:34 PM com.data_mining.logic.ChoosingAttributes addRule
+Feb 18, 2015 12:59:50 AM com.data_mining.logic.ChoosingAttributes extractRule
+INFO: Adding rule inside pruning r1:oldpeakST>=2.1
+Feb 18, 2015 12:59:50 AM com.data_mining.logic.ChoosingAttributes addRule
 INFO: Adding the rule condition bloodSugar>120=1
-Feb 16, 2015 4:13:34 PM com.data_mining.logic.ChoosingAttributes addRule
+Feb 18, 2015 12:59:50 AM com.data_mining.logic.ChoosingAttributes extractRule
+INFO: Adding rule inside pruning r2:bloodSugar>120=1
+Feb 18, 2015 12:59:50 AM com.data_mining.logic.ChoosingAttributes addRule
 INFO: Adding the rule condition chestPain=2
-Feb 16, 2015 4:13:34 PM com.data_mining.logic.ChoosingAttributes addRule
+Feb 18, 2015 12:59:50 AM com.data_mining.logic.ChoosingAttributes addRule
 INFO: Adding the rule condition age<65.5
-Feb 16, 2015 4:13:34 PM com.data_mining.logic.ChoosingAttributes addRule
+Feb 18, 2015 12:59:50 AM com.data_mining.logic.ChoosingAttributes extractRule
+INFO: Adding rule inside pruning r3:chestPain=2/\age<65.5
+Feb 18, 2015 12:59:50 AM com.data_mining.logic.ChoosingAttributes addRule
 INFO: Adding the rule condition bloodPressure<110.0
-Feb 16, 2015 4:13:34 PM com.data_mining.logic.ChoosingAttributes addRule
+Feb 18, 2015 12:59:50 AM com.data_mining.logic.ChoosingAttributes addRule
 INFO: Training record size zero
-Feb 16, 2015 4:13:34 PM com.data_mining.logic.ChoosingAttributes extractRule
+Feb 18, 2015 12:59:50 AM com.data_mining.logic.ChoosingAttributes extractRule
 INFO: Reserve size is zero breaking loop

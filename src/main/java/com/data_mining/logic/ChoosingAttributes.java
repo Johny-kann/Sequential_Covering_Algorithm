@@ -89,6 +89,8 @@ public class ChoosingAttributes {
 			if(rule.getgError()<0.5)
 			{
 				
+				TrainingLog.trainLogs.info("Adding rule inside pruning "+new Outputs().outputRule(rule)
+						);
 			ruleset.addRules(rule);
 			index++;
 			}
@@ -100,6 +102,8 @@ public class ChoosingAttributes {
 		}
 		else
 		{
+			TrainingLog.trainLogs.info("Adding rule outside pruning "+new Outputs().outputRule(rule)
+					);
 			ruleset.addRules(rule);
 			index++;
 		}
