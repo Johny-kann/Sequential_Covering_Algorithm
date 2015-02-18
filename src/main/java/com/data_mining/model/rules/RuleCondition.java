@@ -7,7 +7,7 @@ public class RuleCondition
 	private String condition;
 	private Double error;
 	private String split;
-	private Integer noOfCorrectClass;
+	private Integer noOfCorrectClass=0;
 	
 	public RuleCondition(String nam,String val,String con,Double error,String split,int correctClass)
 	{

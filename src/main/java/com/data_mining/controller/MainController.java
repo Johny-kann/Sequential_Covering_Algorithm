@@ -106,26 +106,12 @@ public class MainController {
 		Outputs.printToConsole(new Outputs().outputRuleSet(mainRuleSet));
 		Outputs.printToConsole("Train Data");
 		
-		if(Notations.PRUNING_ON)
-		{
-			
-			Outputs.printToConsole(new Outputs().outPutTable(mainAttributes));
-			TrainingLog.accuracyLogs.info("Finding accuracy for training data");
-			Outputs.printToConsole("Accuracy "+
-					new ChoosingAttributes().AccuracyForTableByRuleSet(mainAttributes, mainRuleSet)
-							);
-		}
-		else
-		{
-			Outputs.printToConsole(new Outputs().outPutTable(mainAttributes));
-	//		Outputs.printToConsole(new Outputs().outPutTable());
-	//		TrainingLog.accuracyLogs.info("Finding accuracy for testing data");
+				Outputs.printToConsole(new Outputs().outPutTable(mainAttributes));
+	
 		Outputs.printToConsole("Accuracy "+
 		new ChoosingAttributes().AccuracyForTableByRuleSet(mainAttributes, mainRuleSet)
 				);
-		}
-		
-		
+			
 	}
 	
 	

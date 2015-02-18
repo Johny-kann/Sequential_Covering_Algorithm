@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import com.data_mining.constants.Notations;
+import com.data_mining.logs.TrainingLog;
 import com.data_mining.model.attributes_records.DataTable;
 import com.data_mining.model.attributes_records.Records;
 import com.data_mining.model.errors.ErrorModelList;
@@ -367,6 +368,9 @@ public class CommonLogics {
 	{
 		RuleCondition index = null;
 		
+		if(Notations.STRICTLY_LAPLACE==false)
+		{
+			TrainingLog.accuracyLogs.info("Inside strictly_laplace false block");
 		for(RuleCondition rule:rules)
 		{
 		
@@ -376,14 +380,28 @@ public class CommonLogics {
 				break;
 			}
 		}
-//		Double laplace = rules.get(0).getError();
+		try
+		{
+		TrainingLog.accuracyLogs.info("Rule chosen in strictly_laplace false after for loop "+index.getCondition());
+		}catch(NullPointerException ne)
+		{
+			TrainingLog.accuracyLogs.info("Null pointer exception index not assigned any value");
+		}
+		}
 		
+		else
+		{
+			TrainingLog.accuracyLogs.info("Inside strictly_laplace true block");
+	//		Double laplace = rules.get(0).getError();
+			index = rules.get(0);
+			TrainingLog.accuracyLogs.info("Rule chosen in else"+index.getCondition());
+		}
 	
 		for(RuleCondition rule:rules)
 		{
 		
-			if(index.getError()<rule.getError() 
-			//		&&	rule.getNoOfCorrectClass()>0
+		
+			if(index.getError()<rule.getError()
 					)
 			{
 				index = rule;
@@ -391,7 +409,7 @@ public class CommonLogics {
 		}
 		
 		
-
+		TrainingLog.accuracyLogs.info("Rule chosen "+index.getCondition());
 		
 		return index;
 		
