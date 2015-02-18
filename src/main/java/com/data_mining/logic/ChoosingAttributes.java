@@ -512,7 +512,7 @@ public Rules addRule(DataTable input,String category,int index)
 //				System.out.println(correct+"|"+wrong);
 					Outputs.printToConsole(
 							new Outputs().outputRule(rr)+
-							rr.getRuleNumber()+" correct "+rr.getCorrectClass()+" wrong "+rr.getWrongClass());
+							" correct "+rr.getCorrectClass()+" wrong "+rr.getWrongClass());
 			
 			cl.removeRecords(temp, reserve);
 		}

@@ -71,14 +71,14 @@ public class Outputs {
 				if(i==ruleSet.getRulesList().size()-1)
 				{
 					str.append(outputRule(ruleSet.getRulesList().get(i))+"{}");
-					str.append(" --> "+ruleSet.getRulesList().get(i).getCategory());
+		//			str.append(" --> "+ruleSet.getRulesList().get(i).getCategory());
 			
-					if(Notations.PRUNING_ON)
-					{
-						str.append(" G Error "+giveGError(ruleSet, i));
-					}
 				}
+				else
+				{
 				str.append(outputRule(ruleSet.getRulesList().get(i)));
+				}
+				
 				str.append(" --> "+ruleSet.getRulesList().get(i).getCategory());
 				
 				if(Notations.PRUNING_ON)

@@ -14,6 +14,7 @@ public class Tester {
 
 	public static void main(String args[])
 	{
+		Outputs.printToConsole(args[1]);
 		new TrainingLog();
 		Notations.PRUNING_ON = true;
 		MainController mc = new MainController();
