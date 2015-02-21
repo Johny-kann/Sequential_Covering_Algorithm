@@ -24,9 +24,5 @@ public class Tester {
 		mc.fillRuleSet();
 		mc.output();
 		
-		
-		
-		
-		
 	}
 }

@@ -1,3 +1,4 @@
+Test Data
 age		sex		chestPain		bloodPressure		cholestoral		bloodSugar>120		electrocardiographic		maxHeartRate		angina		oldpeakST		slopeST		majorVessels		thal		heartDiseaseheartDisease
 57		1		3		128		229		0		2		150		0		0.4		2		1		7		yes
 66		1		4		160		228		0		2		138		0		2.3		1		0		6		no

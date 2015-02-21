@@ -35,37 +35,8 @@ public class SmallClass {
 		
 	public static void main(String[] args) 
 	{
-		String location = FilesList.LOG_ACCURACY;
-	
-	//	InputStream file = FileReader.class.getClass().getResourceAsStream(location);
-		FileReader file = null;
-		try {
-			file = new FileReader(location);
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		BufferedReader br = null;
-	
-			br = new BufferedReader(
-							file);
-							
-		
-		String sCurrentLine = "";
-		
-		try {
-			
-			while ((sCurrentLine = br.readLine()) != null) {
-				
-			//	lines.add(sCurrentLine);
-				System.out.println(sCurrentLine
-						);
-				
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String no = null;
+		System.out.println(no==null);
 		
 	}
 }

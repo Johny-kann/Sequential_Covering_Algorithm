@@ -1,60 +1,60 @@
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Inside strictly_laplace false block
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Rule chosen in strictly_laplace false after for loop age<42.0
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Rule chosen bloodPressure>=146.0
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Inside strictly_laplace false block
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Rule chosen in strictly_laplace false after for loop sex=0
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Rule chosen chestPain=4
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Inside strictly_laplace false block
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Rule chosen in strictly_laplace false after for loop age<53.0
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Rule chosen oldpeakST>=2.1
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Inside strictly_laplace false block
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Rule chosen in strictly_laplace false after for loop sex=1
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Rule chosen sex=1
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Inside strictly_laplace false block
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Rule chosen in strictly_laplace false after for loop age<49.5
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Rule chosen bloodSugar>120=1
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Inside strictly_laplace false block
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Rule chosen in strictly_laplace false after for loop sex=1
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Rule chosen sex=1
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Inside strictly_laplace false block
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Rule chosen in strictly_laplace false after for loop age<49.5
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Rule chosen chestPain=2
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Inside strictly_laplace false block
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Rule chosen in strictly_laplace false after for loop age<65.5
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Rule chosen age<65.5
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Inside strictly_laplace false block
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Rule chosen in strictly_laplace false after for loop sex=1
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Rule chosen sex=1
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Inside strictly_laplace false block
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Rule chosen in strictly_laplace false after for loop age<49.5
-Feb 18, 2015 1:19:10 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
+Feb 21, 2015 4:36:17 PM com.data_mining.logic.CommonLogics bestAttributeFromErrorModel
 INFO: Rule chosen bloodPressure<110.0

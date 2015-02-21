@@ -41,6 +41,7 @@ public class TextFileReader {
 	//	InputStream file = FileReader.class.getClass().getResourceAsStream(location);
 		FileReader file = null;
 		try {
+			TrainingLog.mainLogs.info("Going to read file "+location);
 			file = new FileReader(location);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

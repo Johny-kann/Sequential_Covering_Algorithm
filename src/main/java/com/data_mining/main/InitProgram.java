@@ -19,8 +19,7 @@ public class InitProgram {
 		mc.loadAttributesAndRecords();
 		mc.fillRuleSet();
 		mc.output();
-		
-		
+	
 	
 	}
 

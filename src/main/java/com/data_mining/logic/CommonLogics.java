@@ -10,11 +10,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import com.data_mining.constants.FilesList;
 import com.data_mining.constants.Notations;
 import com.data_mining.logs.TrainingLog;
 import com.data_mining.model.attributes_records.DataTable;
 import com.data_mining.model.attributes_records.Records;
-
 import com.data_mining.model.errors.PassingAttribute;
 import com.data_mining.model.rules.RuleCondition;
 import com.data_mining.model.rules.RuleSet;
@@ -53,7 +53,7 @@ public class CommonLogics {
 	{
 		if(args[0].equalsIgnoreCase("Prune-ON"))
 		{
-			System.out.println(args[0]);
+	
 			Notations.PRUNING_ON = true;
 		}
 		else
@@ -70,8 +70,35 @@ public class CommonLogics {
 			Notations.TEST_ON = false;
 		}
 		
+		try
+		{
+			if(!args[2].isEmpty())
+				FilesList.ATTRIBUTES_FILES = args[2];
+			if(!args[3].isEmpty())
+				FilesList.RECORD_FILES = args[3];
+			if(!args[4].isEmpty())
+				FilesList.TEST_RECORD_FILES = args[4];
+		}
+		catch(NullPointerException ne)
+		{
+			TrainingLog.trainLogs.info("File names not given in input");
+		}
+		catch(Exception e)
+		{
+			TrainingLog.trainLogs.info("General exception");
+		}
+		
 		new TrainingLog();
 		
+	}
+	
+	public static void settingFiles(String name,String filesConst)
+	{
+		TrainingLog.mainLogs.info("Setting file "+name+" file constant "+filesConst);
+		if(!( name == null || name.isEmpty()))
+		{
+			filesConst = name;
+		}
 	}
 	
 	public String conditionGeneratorDiscrete(String name,String condition)

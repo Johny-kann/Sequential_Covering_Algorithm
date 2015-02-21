@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import com.data_mining.constants.FilesList;
+import com.data_mining.logic.CommonLogics;
 import com.data_mining.view.console.Outputs;
 
 public class PropertiesConfig {
@@ -20,9 +21,17 @@ public class PropertiesConfig {
            
         //   prop.load(is);
        
-           FilesList.ATTRIBUTES_FILES = prop.getProperty("Attributes");
+           CommonLogics.settingFiles(prop.getProperty("Attributes"), FilesList.ATTRIBUTES_FILES);
+           CommonLogics.settingFiles(prop.getProperty("Train-records"), FilesList.RECORD_FILES);
+           CommonLogics.settingFiles(prop.getProperty("Test-records"), FilesList.TEST_RECORD_FILES);
+           
+           CommonLogics.settingFiles(prop.getProperty("Out-main_ruleset"), FilesList.WRITE_RULE_SET);
+           CommonLogics.settingFiles(prop.getProperty("Out-Train_result"), FilesList.WRITE_TRAIN_RESULT);
+           CommonLogics.settingFiles(prop.getProperty("Out-Test_result"), FilesList.WRITE_TEST_RESULT);
+           
+     /*      FilesList.ATTRIBUTES_FILES = prop.getProperty("Attributes");
            FilesList.RECORD_FILES = prop.getProperty("Train-records");
-           FilesList.TEST_RECORD_FILES = prop.getProperty("Test-records");
+           FilesList.TEST_RECORD_FILES = prop.getProperty("Test-records");     */
             	//	prop.getProperty("server-name");
             
             

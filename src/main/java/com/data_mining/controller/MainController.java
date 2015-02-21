@@ -146,7 +146,8 @@ public class MainController {
 		Outputs.printToConsole(
 		new Outputs().outPutTable(testData)
 		);
-	
+		stBuffer.append("Test Data");
+		stBuffer.append(System.lineSeparator());
 		stBuffer.append(new Outputs().outPutTable(testData)
 				);
 		stBuffer.append("Accuracy "+
