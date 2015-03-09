@@ -51,43 +51,35 @@ public class CommonLogics {
 	
 	public static void assignInitValues(String args[])
 	{
-		if(args[0].equalsIgnoreCase("Prune-ON"))
+		for(String str:args)
 		{
-	
+			
+		if(str.equalsIgnoreCase("Prune-ON"))
+		{
+			System.out.println(args[0]);
 			Notations.PRUNING_ON = true;
 		}
-		else
+		else if(str.equalsIgnoreCase("Prune-OFF"))
 		{
 			Notations.PRUNING_ON = false;
 		}
 		
-		if(args[1].equalsIgnoreCase("Test-ON"))
+		else if(str.equalsIgnoreCase("Test-ON"))
 		{
 			Notations.TEST_ON = true;
 		}
-		else
+		else if(str.equalsIgnoreCase("Test-OFF"))
 		{
 			Notations.TEST_ON = false;
 		}
 		
-		try
+		else if(str.contains("CONFIG"))
 		{
-			if(!args[2].isEmpty())
-				FilesList.ATTRIBUTES_FILES = args[2];
-			if(!args[3].isEmpty())
-				FilesList.RECORD_FILES = args[3];
-			if(!args[4].isEmpty())
-				FilesList.TEST_RECORD_FILES = args[4];
-		}
-		catch(NullPointerException ne)
-		{
-			TrainingLog.trainLogs.info("File names not given in input");
-		}
-		catch(Exception e)
-		{
-			TrainingLog.trainLogs.info("General exception");
-		}
 		
+			FilesList.CONFIG_FILE = str.substring(7, str.length());
+			TrainingLog.mainLogs.info("Getting config file "+FilesList.CONFIG_FILE);
+		}
+		}
 		new TrainingLog();
 		
 	}

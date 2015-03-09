@@ -35,8 +35,8 @@ public class SmallClass {
 		
 	public static void main(String[] args) 
 	{
-		String no = null;
-		System.out.println(no==null);
+		String str = "CONFIG=Helloboss";
+		System.out.println(str.substring(7, str.length()));
 		
 	}
 }
